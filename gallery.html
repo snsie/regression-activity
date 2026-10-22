@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery &amp; votes · Explain the Model</title>
+  <meta name="description" content="Every app from the class in one list. Add your app's link, try classmates' apps and vote anonymously.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  <script type="module" src="assets/gallery.js"></script>
+</head>
+<body data-page="gallery">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html" aria-current="page">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Resources</p>
+<h1>Gallery &amp; votes</h1>
+<p class="lead">Every app from the class in one list. Add your app's public link, try your classmates' apps, and vote for the ones that explain the models best.</p>
+
+<div id="gallery" class="gallery wide" data-endpoint="https://script.google.com/macros/s/AKfycbxnI5Vsq_2-INdWC-mSPrXX7jJ37iTF7Pw53itYo1pB47Q9aczj6XHnoWFkpdUnExD7AA/exec">
+  <noscript><div class="callout"><p>The gallery needs JavaScript. Turn it on to see the list and vote.</p></div></noscript>
+  <div class="callout gallery-closed" hidden>
+    <p class="callout-title">The gallery isn't open yet</p>
+    <p>It opens in class, when the evaluation starts. Until then, finish your app and <a href="submit.html">submit it on Canvas</a>.</p>
+  </div>
+  <p class="callout gallery-key-note" hidden>This browser isn't saving your voter key, so after a reload you'll count as a new voter and won't see your earlier votes. Please vote from a normal (not private) window.</p>
+
+  <form class="add-form card" id="add-form" hidden novalidate>
+    <h2>Add an app</h2>
+    <div class="add-fields">
+      <label class="field">Public app link
+        <input type="url" name="url" id="add-url" required placeholder="https://username.github.io/explain-the-model/" autocomplete="url" inputmode="url" maxlength="500">
+      </label>
+      <label class="field"><span>Name <span class="muted">(optional)</span></span>
+        <input type="text" name="title" id="add-title" maxlength="80" placeholder="e.g. Glucose, explained">
+      </label>
+    </div>
+    <p><button type="submit" class="button primary">Add to the list</button></p>
+    <p class="form-msg small" id="add-msg" role="status" aria-live="polite"></p>
+    <p class="small muted">Add your own app from the browser you'll vote from, so it's marked as yours.</p>
+  </form>
+
+  <section class="gallery-apps" hidden aria-labelledby="apps-heading">
+    <div class="gallery-head">
+      <h2 id="apps-heading">Apps <span class="gallery-summary muted small"></span></h2>
+      <div class="gallery-tools">
+        <label class="field inline">Sort
+          <select id="gallery-sort">
+            <option value="votes">Most votes</option>
+            <option value="new">Newest first</option>
+            <option value="name">A–Z</option>
+          </select>
+        </label>
+        <button type="button" class="pill-button" id="gallery-refresh">Refresh</button>
+      </div>
+    </div>
+    <p class="gallery-status small muted" role="status" aria-live="polite">Loading the gallery…</p>
+    <ol class="gallery-list" id="gallery-list"></ol>
+  </section>
+</div>
+
+<h2>Voting rules</h2>
+<ul>
+  <li><strong>Anyone can add an app.</strong> Paste its public link above. Each link can be listed only once.</li>
+  <li><strong>One vote per app.</strong> Vote for as many apps as you like, but only once each. A vote can't be taken back.</li>
+  <li><strong>Not your own.</strong> You can't vote for an app you added.</li>
+  <li><strong>Anonymous.</strong> The list shows only totals. No names are stored, and nobody can see who voted for which app.</li>
+  <li><strong>One browser, one voter.</strong> There's no sign-in: your browser keeps a random key that stands for you. Please add and vote from one browser, and don't vote again from another device or a private window.</li>
+</ul>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

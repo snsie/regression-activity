@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publish &amp; back up · Explain the Model</title>
+  <meta name="description" content="Publish your app with a free public host and back up your code to GitHub.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  
+</head>
+<body data-page="hosting">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html" aria-current="page">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Resources</p>
+<h1>Publish &amp; back up</h1>
+<p class="lead">You need <strong>both</strong>: a public link <a class="help" href="glossary.html#public-link" data-help="public-link" aria-label="What is Public link?" title="What is Public link?"><span aria-hidden="true">?</span></a> that anyone can open, and your code backed up on GitHub <a class="help" href="glossary.html#github-backup" data-help="github-backup" aria-label="What is GitHub backup?" title="What is GitHub backup?"><span aria-hidden="true">?</span></a>. Do this before class; it takes 15–20 minutes.</p>
+
+<div class="callout">
+  <p class="callout-title">Both are required</p>
+  <p>A GitHub repository alone isn't a hosted app, and a hosted app alone isn't a backup. This applies whichever host you use.</p>
+</div>
+
+<h2>1. Choose a route</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col"></th><th scope="col">Route A: GitHub Pages</th><th scope="col">Route B: Streamlit Community Cloud</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">You write</th><td>HTML + JavaScript</td><td>Python</td></tr>
+    <tr><th scope="row">Good if you…</th><td>like web pages, or want full design freedom</td><td>used Streamlit before</td></tr>
+    <tr><th scope="row">Runs Python?</th><td>No: static files only <a class="help" href="glossary.html#static-site" data-help="static-site" aria-label="What is Static site?" title="What is Static site?"><span aria-hidden="true">?</span></a></td><td>Yes</td></tr>
+    <tr><th scope="row">Cost</th><td>Free with a public repository</td><td>Free</td></tr>
+  </tbody>
+</table></div>
+<p class="small muted">Another free host is fine too, if it gives a public link that opens without signing in, and you still back up to GitHub.</p>
+
+<h2>2. Put the starter on GitHub</h2>
+<ol class="steps">
+  <li>Download and unzip the starter from <a href="data.html">Data &amp; files</a>.</li>
+  <li>On GitHub, create a <strong>new public repository</strong> (for example <code>explain-the-model</code>). Don't add a README; the starter has one.</li>
+  <li>In the starter folder, run:
+<pre><code>git init -b main
+git add .
+git commit -m "Starter"
+git remote add origin https://github.com/&lt;username&gt;/&lt;repo&gt;.git
+git push -u origin main</code></pre>
+    <details><summary>No git on your computer?</summary><div class="details-body">
+      <p>On your new repository's page, click <strong>uploading an existing file</strong> and drag in everything from the starter folder, including the <code>data</code> and <code>outputs</code> folders. Then click <strong>Commit changes</strong>.</p></div></details>
+  </li>
+</ol>
+
+<h2>3. Publish</h2>
+<details open><summary>Route A: GitHub Pages</summary><div class="details-body">
+  <ol>
+    <li>On your repository, open <strong>Settings → Pages</strong>.</li>
+    <li>Under <strong>Source</strong>, choose <strong>Deploy from a branch</strong>, then branch <code>main</code> and folder <code>/ (root)</code>. Click <strong>Save</strong>.</li>
+    <li>After 1–2 minutes your link is <code>https://&lt;username&gt;.github.io/&lt;repo&gt;/</code>.</li>
+  </ol>
+  <p>To try it on your computer first, run <code>python -m http.server 8000</code> in the folder and open <code>http://localhost:8000</code>. Opening <code>index.html</code> directly won't load the data.</p>
+</div></details>
+<details><summary>Route B: Streamlit Community Cloud</summary><div class="details-body">
+  <ol>
+    <li>Go to <a href="https://share.streamlit.io">share.streamlit.io</a> and sign in with GitHub.</li>
+    <li>Click <strong>Create app</strong>, then pick your repository, branch <code>main</code> and file <code>streamlit_app.py</code>.</li>
+    <li>Click <strong>Deploy</strong>. Every package your app imports must be listed in <code>requirements.txt</code>.</li>
+  </ol>
+  <p>To try it on your computer first: <code>uv run --with streamlit,pandas,numpy streamlit run streamlit_app.py</code></p>
+</div></details>
+
+<h2>4. Check it like a reviewer</h2>
+<ul>
+  <li>Open your link in a <strong>private or incognito window</strong>. It must load without signing in.</li>
+  <li>Switch datasets in all three sections.</li>
+  <li>Use each section as a stranger would, without your own explanations. Does it teach its learning objective on its own?</li>
+  <li>Put your link at the top of <code>README.md</code>, then commit and push.</li>
+</ul>
+
+<h2>5. Back up as you go</h2>
+<p>Commit and push whenever a section starts working, and again after your final checks. Saving on your laptop, or a local commit, is not a backup until it's pushed.</p>
+<pre><code>git add .
+git commit -m "Forest section works"
+git push</code></pre>
+<p>Never commit passwords, tokens or API keys.</p>
+
+<h2>6. Before you submit</h2>
+<ul>
+  <li>Push your final code, then check that your public link shows it. Hosts can take a minute or two to update.</li>
+  <li>Check that <code>README.md</code> starts with your public app link and a link to each section.</li>
+  <li>Submit your repository link on Canvas. After that, don't change your app during evaluation unless your instructor approves a fix.</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<details><summary>My GitHub Pages link shows "404"</summary><div class="details-body">
+  <p>Wait two minutes. Check that Pages is set to branch <code>main</code>, folder <code>/ (root)</code>, and that <code>index.html</code> is at the top of the repository, not inside a subfolder.</p></div></details>
+<details><summary>The page loads, but no data appears</summary><div class="details-body">
+  <p>Check that the <code>outputs</code> folder was uploaded, and that your code uses relative paths like <code>outputs/glucose.json</code> (no leading slash).</p></div></details>
+<details><summary>Streamlit says "ModuleNotFoundError"</summary><div class="details-body">
+  <p>Add the missing package to <code>requirements.txt</code>, commit and push. Streamlit redeploys automatically.</p></div></details>
+<details><summary>Nothing works and time is running out</summary><div class="details-body">
+  <p>Switch to the other route. Both use the same data and the same rules, so your work carries over. Tell your instructor if your link breaks during evaluation.</p></div></details>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

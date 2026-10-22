@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overview · Explain the Model</title>
+  <meta name="description" content="An in-class activity: build one app that teaches how linear regression, random forests and gradient boosting work to visitors who know machine learning, but not these algorithms.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  
+</head>
+<body data-page="index">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./" aria-current="page">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">M10 in-class activity</p>
+<h1>Explain the Model</h1>
+<p class="lead">Build one app that explains three regression models <a class="help" href="glossary.html#regression" data-help="regression" aria-label="What is Regression?" title="What is Regression?"><span aria-hidden="true">?</span></a> to an anonymous visitor: someone who knows about machine learning and regression, but doesn't understand how these algorithms work. Your classmates use your app as that visitor would, then vote for the section that best teaches each learning objective.</p>
+
+<dl class="facts">
+  <dt>Who</dt><dd>You, working on your own with an AI coding agent</dd>
+  <dt>Build</dt><dd>One public app with three sections, one per model</dd>
+  <dt>Data</dt><dd>Fasting glucose, blood pressure and lung function, all three in <em>every</em> section</dd>
+  <dt>Publish</dt><dd>A free public link <a class="help" href="glossary.html#public-link" data-help="public-link" aria-label="What is Public link?" title="What is Public link?"><span aria-hidden="true">?</span></a> <em>and</em> your code backed up on GitHub <a class="help" href="glossary.html#github-backup" data-help="github-backup" aria-label="What is GitHub backup?" title="What is GitHub backup?"><span aria-hidden="true">?</span></a></dd>
+  <dt>Submit</dt><dd>Your GitHub repository link on Canvas, with your app link at the top of its README</dd>
+  <dt>Audience</dt><dd>An anonymous visitor who knows machine learning and regression, but not these algorithms. <a href="#judged">How you're judged</a></dd>
+  <dt>Win</dt><dd>Peer votes for the section that best teaches its learning objective: one winner for each model</dd>
+</dl>
+
+<div class="timeline" role="list" aria-label="Timeline">
+  <div role="listitem" class="build"><strong>Build</strong>about 105 min, all three sections, any order</div>
+  <div role="listitem"><strong>Evaluate</strong>30 min</div>
+</div>
+<p class="small muted">All three competitions are open from the start. Work on them in any order, or switch between them.</p>
+
+<h2 id="judged">How your app is judged</h2>
+<p>Each section is judged on one question: <strong>how well does it teach its learning objective to the target visitor?</strong> Reviewers vote on that, not on how polished the app looks or how many features it has.</p>
+<dl class="facts">
+  <dt>The visitor</dt><dd>Knows what machine learning and regression are. For example, a model learns from data to predict a number, and it should be checked on new data. They don't know how a linear regression, a random forest or gradient boosting turns a person's data into a prediction.</dd>
+  <dt>Anonymous</dt><dd>They open your link cold. They haven't seen this page, taken this class or met you, and you aren't there to explain. Everything they need has to be in the app.</dd>
+  <dt>Success</dt><dd>After a few minutes in a section, they can explain its learning objective in their own words.</dd>
+</dl>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">Section</th><th scope="col">Learning objective: after using it, the visitor can…</th></tr></thead>
+  <tbody>
+    <tr><td><a href="linear.html">Push &amp; Pull</a></td><td>rebuild a prediction from a starting point and one signed push per feature, and tell a coefficient apart from one person's push.</td></tr>
+    <tr><td><a href="forest.html">Wisdom of the Forest</a></td><td>explain how varied trees combine by averaging, and tell disagreement between trees apart from real uncertainty about a prediction.</td></tr>
+    <tr><td><a href="boosting.html">One Correction at a Time</a></td><td>explain how boosting adds one small correction per round, and use validation error to choose when to stop.</td></tr>
+  </tbody>
+</table></div>
+<ul>
+  <li><strong>Teach the algorithm, not the basics.</strong> Don't spend your space on what machine learning is. Define a term briefly when you use it, then spend the space on how the model works.</li>
+  <li><strong>Polish only counts if it helps.</strong> A plain section that teaches the objective beats a beautiful one that doesn't.</li>
+  <li><strong>The required checklists are the minimum.</strong> Meeting them lets your app compete; they don't earn votes on their own.</li>
+</ul>
+
+<h2>The three competitions</h2>
+<div class="card-grid">
+  <article class="card">
+    <p class="eyebrow">Linear regression</p>
+    <h3>Push &amp; Pull</h3>
+    <p>Which features push a prediction up or down, and by how much?</p>
+    <a class="card-link" href="linear.html">Open the brief</a>
+  </article>
+  <article class="card">
+    <p class="eyebrow">Random forest</p>
+    <h3>Wisdom of the Forest</h3>
+    <p>How do many different trees combine into one prediction?</p>
+    <a class="card-link" href="forest.html">Open the brief</a>
+  </article>
+  <article class="card">
+    <p class="eyebrow">Gradient boosting</p>
+    <h3>One Correction at a Time</h3>
+    <p>How does each new tree improve the model, and when should it stop?</p>
+    <a class="card-link" href="boosting.html">Open the brief</a>
+  </article>
+</div>
+
+<h2>Start here</h2>
+<ol class="steps">
+  <li><strong>Get the starter.</strong> It already has all three sections, a dataset menu, a menu of five example people from the data, and the correct numbers in plain tables. <a href="data.html">Data &amp; files</a></li>
+  <li><strong>Publish a test link before class.</strong> Put the starter on GitHub and on a free host, then open it in a private window. <a href="hosting.html">Publish &amp; back up</a></li>
+  <li><strong>Redesign each section</strong> so the visitor learns its learning objective without your help. You never train a model; the numbers are supplied <a class="help" href="glossary.html#model-outputs" data-help="model-outputs" aria-label="What is Supplied model outputs?" title="What is Supplied model outputs?"><span aria-hidden="true">?</span></a>.</li>
+  <li><strong>Check, push, submit on Canvas.</strong> <a href="submit.html">Submission checklist</a></li>
+</ol>
+<p><a class="button primary" href="downloads/explain-the-model-starter.zip" download>Download the starter (.zip, 538 KB)</a></p>
+
+<div class="callout">
+  <p class="callout-title">New to these ideas?</p>
+  <p>Look for the <span class="help" aria-hidden="true" style="cursor:default">?</span> buttons. Each one opens a short, plain-language explanation of the term next to it. The <a href="glossary.html">glossary</a> lists them all.</p>
+</div>
+
+<h2>Fair play</h2>
+<ul>
+  <li><strong>Use the supplied numbers.</strong> Don't retrain the models or invent predictions.</li>
+  <li><strong>Work on your own.</strong> Your AI agent writes code; you make the design decisions and check the numbers.</li>
+  <li><strong>Back up as you go.</strong> Commit and push to GitHub whenever a section works.</li>
+  <li><strong>Freeze it after you submit.</strong> Don't change your app during evaluation unless your instructor approves a fix.</li>
+</ul>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wisdom of the Forest: random forest · Explain the Model</title>
+  <meta name="description" content="Competition brief: explain how many different decision trees combine into one random forest prediction.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  <script type="module" src="assets/demos.js"></script>
+</head>
+<body data-page="forest">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html" aria-current="page">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Competition · Random forest <a class="help" href="glossary.html#random-forest" data-help="random-forest" aria-label="What is Random forest?" title="What is Random forest?"><span aria-hidden="true">?</span></a></p>
+<h1>Wisdom of the Forest</h1>
+<p class="core-question">How do many different trees combine into one prediction?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive experience that explains how individual decision trees <a class="help" href="glossary.html#decision-tree" data-help="decision-tree" aria-label="What is Decision tree?" title="What is Decision tree?"><span aria-hidden="true">?</span></a> contribute to a forest's combined prediction.</dd>
+  <dt>Audience</dt><dd>An anonymous visitor who knows machine learning and regression, but not how a random forest makes a prediction.</dd>
+  <dt>Learning objective</dt><dd>Explain how varied trees combine by averaging, and tell disagreement between trees apart from real uncertainty about a prediction.</dd>
+  <dt>Viewer takeaway</dt><dd>The forest asks 100 slightly different trees and averages their guesses.</dd>
+</dl>
+
+<div class="callout">
+  <p class="callout-title">How this section is judged</p>
+  <p>Reviewers use your section as the visitor described above would: cold, with no one to ask. They vote for the section that best teaches the <strong>learning objective</strong> above. The checklists below are the minimum to compete; they don't earn votes on their own. <a href="./#judged">More on judging</a></p>
+</div>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="forest-required"></p>
+<ul class="checklist" data-store="forest-required">
+  <li><input type="checkbox" id="for-r1"><div class="item-body"><label for="for-r1">The viewer can switch between all three datasets and pick one of the supplied example people (Example person 1–5).</label> <a class="help" href="glossary.html#example-person" data-help="example-person" aria-label="What is Example person?" title="What is Example person?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="for-r2"><div class="item-body"><label for="for-r2">Shows several individual trees' guesses and the average of all 100, and makes clear which is which.</label></div></li>
+  <li><input type="checkbox" id="for-r3"><div class="item-body"><label for="for-r3">The viewer can change how many trees are included (in the supplied order) and watch the running average. Fewer than 100 is labelled a partial forest.</label> <a class="help" href="glossary.html#partial-forest" data-help="partial-forest" aria-label="What is Partial forest?" title="What is Partial forest?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="for-r4"><div class="item-body"><label for="for-r4">Explains why the trees differ: each learns from its own sample of people and only some features at each question.</label> <a class="help" href="glossary.html#bootstrap" data-help="bootstrap" aria-label="What is Bootstrap sample?" title="What is Bootstrap sample?"><span aria-hidden="true">?</span></a> <a class="help" href="glossary.html#feature-subset" data-help="feature-subset" aria-label="What is Random feature choice?" title="What is Random feature choice?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="for-r5"><div class="item-body"><label for="for-r5">Shows at least one person the trees disagree on, and calls it disagreement, not a confidence or prediction interval.</label> <a class="help" href="glossary.html#disagreement" data-help="disagreement" aria-label="What is Disagreement (not confidence)?" title="What is Disagreement (not confidence)?"><span aria-hidden="true">?</span></a></div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="forest-done"></p>
+<ul class="checklist" data-store="forest-done">
+  <li><input type="checkbox" id="for-d1"><div class="item-body"><label for="for-d1">Example person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="for-d2"><div class="item-body"><label for="for-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="for-d5"><div class="item-body"><label for="for-d5">Someone who hasn't seen your app can explain the learning objective in their own words after using the section, without help from you.</label></div></li>
+  <li><input type="checkbox" id="for-d3"><div class="item-body"><label for="for-d3">Every number has units, and any partial forest is labelled as one.</label></div></li>
+  <li><input type="checkbox" id="for-d4"><div class="item-body"><label for="for-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+<div class="table-wrap"><table class="check">
+    <caption><span class="tag">From the supplied data</span> Your finished section should still show these numbers</caption>
+    <thead><tr><th scope="col">Dataset</th><th scope="col">Pick</th><th scope="col">Your app shows</th></tr></thead>
+    <tbody><tr><th scope="row">Fasting glucose</th><td>Example person 1 (Female, age 58)</td><td>average of all 100 trees <strong>108.6</strong> mg/dL (tree 1 alone: 110.0)</td></tr><tr><th scope="row">Blood pressure</th><td>Example person 1 (Male, age 41)</td><td>average of all 100 trees <strong>119.6</strong> mmHg (tree 1 alone: 131.3)</td></tr><tr><th scope="row">Lung function (FEV₁)</th><td>Example person 1 (Male, age 9)</td><td>average of all 100 trees <strong>1,982.5</strong> mL (tree 1 alone: 2,003.0)</td></tr></tbody></table></div>
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Glucose → Example person 4</strong>. The trees disagree a lot. Why can the average of 100 trees be steadier than any single tree?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Trace a person through the first questions of one tree (<code>traced_trees</code> gives trees 1–5).</li>
+      <li>Show how the error on new people changes as trees are added (<code>validation_rmse_by_trees</code>). <a class="help" href="glossary.html#rmse" data-help="rmse" aria-label="What is RMSE (root mean squared error)?" title="What is RMSE (root mean squared error)?"><span aria-hidden="true">?</span></a></li>
+      <li>Show each tree's first question (<code>root_split</code>) to make "different trees" concrete.</li>
+      <li>Forest predictions for edited values. This needs the Streamlit route; see <code>AGENT_BRIEF.md</code>.</li>
+    </ul>
+    <p class="small muted">You don't need to draw all 100 trees.</p>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A crowd guessing the number of jellybeans, a panel of judges, a vote tally, a choir of slightly different voices…</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: how averaging trees makes a forest prediction</summary>
+  <div class="details-body"><div id="demo-forest"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>forest</code> <a class="help" href="glossary.html#model-outputs" data-help="model-outputs" aria-label="What is Supplied model outputs?" title="What is Supplied model outputs?"><span aria-hidden="true">?</span></a>:</p>
+<ul>
+  <li><code>people.&lt;id&gt;.tree_predictions</code>: all 100 guesses, in a fixed order.</li>
+  <li><code>people.&lt;id&gt;.prediction</code>: their average, the forest's prediction.</li>
+  <li><code>bootstrap_unique_training_rows</code> and <code>features_tried_per_split</code>: why the trees differ.</li>
+</ul>
+<p>The helper <code>m10.runningAverage(treePredictions, n)</code> averages the first <em>n</em> trees. See <a href="data.html#outputs">using the model outputs</a>.</p>
+
+<h2>Common questions</h2>
+<details><summary>Why do the trees disagree?</summary><div class="details-body">
+  <p>Each tree learned from a different random sample of people and could only use a few features at each question, so each one learned slightly different rules.</p></div></details>
+<details><summary>Why is the average steadier than one tree?</summary><div class="details-body">
+  <p>One tree's quirks push its guess too high or too low. Across 100 trees, many of those mistakes point in different directions and partly cancel out. Steadier doesn't guarantee more accurate.</p></div></details>
+<details><summary>Isn't the spread of guesses a confidence interval?</summary><div class="details-body">
+  <p>No. The trees learned from overlapping data, so their spread isn't a calibrated measure of how far off the forest might be. Call it disagreement. <a class="help" href="glossary.html#disagreement" data-help="disagreement" aria-label="What is Disagreement (not confidence)?" title="What is Disagreement (not confidence)?"><span aria-hidden="true">?</span></a></p></div></details>
+<details><summary>Why can't the forest predict above the highest value it saw?</summary><div class="details-body">
+  <p>Each tree's guess is an average of training people's outcomes, so it always lies between the lowest and highest training outcome, and so does their average.</p></div></details>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

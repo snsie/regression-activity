@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit &amp; evaluation · Explain the Model</title>
+  <meta name="description" content="Final submission checklist, what to submit, and how review and voting work.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  
+</head>
+<body data-page="submit">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html" aria-current="page">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Resources</p>
+<h1>Submit &amp; evaluation</h1>
+<p class="lead">At the end of the 105-minute build, submit your GitHub repository link on Canvas. Your README carries your app link. Then you'll spend 30 minutes trying classmates' apps and voting.</p>
+
+<h2>Final checklist</h2>
+<p class="checklist-status" data-for="final"></p>
+<ul class="checklist" data-store="final">
+  <li><input type="checkbox" id="fin-1"><div class="item-body"><label for="fin-1">All three sections are finished: <a href="linear.html">Push &amp; Pull</a>, <a href="forest.html">Wisdom of the Forest</a> and <a href="boosting.html">One Correction at a Time</a>.</label></div></li>
+  <li><input type="checkbox" id="fin-2"><div class="item-body"><label for="fin-2">Each section works for glucose, blood pressure and lung function.</label></div></li>
+  <li><input type="checkbox" id="fin-3"><div class="item-body"><label for="fin-3">Example person 1 still shows the numbers in <code>check.md</code> in every section, for every dataset.</label></div></li>
+  <li><input type="checkbox" id="fin-4"><div class="item-body"><label for="fin-4">The app opens in a private window without signing in.</label> <a class="help" href="glossary.html#public-link" data-help="public-link" aria-label="What is Public link?" title="What is Public link?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="fin-5"><div class="item-body"><label for="fin-5">The final code is pushed to GitHub, and the public link shows that version.</label> <a class="help" href="glossary.html#github-backup" data-help="github-backup" aria-label="What is GitHub backup?" title="What is GitHub backup?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="fin-6"><div class="item-body"><label for="fin-6"><code>README.md</code> starts with your public app link, then a direct link to each section.</label></div></li>
+  <li><input type="checkbox" id="fin-7"><div class="item-body"><label for="fin-7"><code>README.md</code> has one takeaway sentence per section: "My viewer should walk away knowing…"</label></div></li>
+  <li><input type="checkbox" id="fin-8"><div class="item-body"><label for="fin-8">I submitted my GitHub repository link on Canvas.</label></div></li>
+</ul>
+
+<h2>What to submit</h2>
+<dl class="facts">
+  <dt>On Canvas</dt><dd>The link to your GitHub repository, e.g. <code>https://github.com/&lt;username&gt;/&lt;repo&gt;</code>.</dd>
+  <dt>In <code>README.md</code></dt><dd>At the top: your public app link, a direct link to each of the three sections, and one takeaway sentence per section. The starter's README has a place for each.</dd>
+</dl>
+<p>Make sure the repository is public, or that your instructor can open it. Your app is reviewed from the link in your README, so test that link in a private window.</p>
+<p class="small muted">After class, add the log of the prompts you gave your AI agent to your repository as <code>prompts.md</code>. That is the only change to make after you submit.</p>
+
+<h2>Evaluation (30 minutes)</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col">What</th><th scope="col" class="num">Minutes</th><th scope="col">Details</th></tr></thead>
+  <tbody>
+    <tr><td>Open the <a href="gallery.html">gallery</a></td><td class="num">2</td><td>Every submitted app is listed, and you get your 3 assigned apps.</td></tr>
+    <tr><td>Review</td><td class="num">15</td><td>5 minutes per app. In each section, use it as an anonymous visitor would, do the "Reviewers will try" task and answer one short question.</td></tr>
+    <tr><td>Showcase</td><td class="num">8</td><td>The top 2 apps per model each give a 1-minute demo.</td></tr>
+    <tr><td>Final votes</td><td class="num">3</td><td>One vote per model: linear, forest and boosting.</td></tr>
+    <tr><td>Debrief</td><td class="num">2</td><td>What the best explainers had in common.</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="judging">What to judge</h2>
+<p>Review each section as its target visitor: someone who knows machine learning and regression, but not how this algorithm works, and who opens the link with no one to explain it. Set aside what you learned building your own app. Then ask:</p>
+<ol>
+  <li><strong>Did it teach the learning objective?</strong> Could that visitor explain the section's <a href="./#judged">learning objective</a> in their own words afterwards? This is the main question.</li>
+  <li><strong>Does it stand on its own?</strong> Could they follow it without the author, this website or the class? Are terms explained where they're used?</li>
+  <li><strong>Is it right?</strong> Are the numbers correct, with units, and are the claims true?</li>
+</ol>
+<p class="small muted">Don't vote for looks, extra features, or a long explanation of what machine learning is. They only count when they help the visitor learn the objective.</p>
+
+<h2>How voting works</h2>
+<ul>
+  <li>You review <strong>3 assigned apps</strong>, and each app gets 3 reviewers. Nobody reviews their own app.</li>
+  <li>After reviewing, vote for the app whose section best taught <strong>each</strong> model's learning objective. Your three votes can go to different apps.</li>
+  <li>The 2 apps with the most votes per model go to the showcase, then the whole class votes. No self-votes.</li>
+  <li>Winners are decided by peer votes only.</li>
+</ul>
+
+<h2>Who can win</h2>
+<p>An app can be a finalist if:</p>
+<ul>
+  <li>its link opens without signing in;</li>
+  <li>all three sections work, each with a dataset menu;</li>
+  <li>it still shows the <code>check.md</code> numbers;</li>
+  <li>it makes no clearly false claim. For example: calling tree disagreement a confidence interval, using the intercept as the starting point, calling validation error a test result, or making causal claims.</li>
+</ul>
+<p class="small muted">This checklist only decides who can be a finalist; it adds no score. If a finalist has a problem, there may be a brief chance to fix it before the showcase.</p>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Push &amp; Pull: linear regression · Explain the Model</title>
+  <meta name="description" content="Competition brief: explain how a linear regression model combines features into a prediction.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  <script type="module" src="assets/demos.js"></script>
+</head>
+<body data-page="linear">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html" aria-current="page">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Competition · Linear regression <a class="help" href="glossary.html#linear-regression" data-help="linear-regression" aria-label="What is Linear regression?" title="What is Linear regression?"><span aria-hidden="true">?</span></a></p>
+<h1>Push &amp; Pull</h1>
+<p class="core-question">Which features push a prediction up or down, and by how much?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive visualization that shows how a linear regression model combines features <a class="help" href="glossary.html#feature" data-help="feature" aria-label="What is Feature?" title="What is Feature?"><span aria-hidden="true">?</span></a> into a prediction <a class="help" href="glossary.html#prediction" data-help="prediction" aria-label="What is Prediction?" title="What is Prediction?"><span aria-hidden="true">?</span></a>.</dd>
+  <dt>Audience</dt><dd>An anonymous visitor who knows machine learning and regression, but not how linear regression builds a prediction.</dd>
+  <dt>Learning objective</dt><dd>Rebuild a prediction from a starting point and one signed push per feature, and tell a coefficient apart from one person's push.</dd>
+  <dt>Viewer takeaway</dt><dd>The model starts from an average prediction and adds one push per feature.</dd>
+</dl>
+
+<div class="callout">
+  <p class="callout-title">How this section is judged</p>
+  <p>Reviewers use your section as the visitor described above would: cold, with no one to ask. They vote for the section that best teaches the <strong>learning objective</strong> above. The checklists below are the minimum to compete; they don't earn votes on their own. <a href="./#judged">More on judging</a></p>
+</div>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="linear-required"></p>
+<ul class="checklist" data-store="linear-required">
+  <li><input type="checkbox" id="lin-r1"><div class="item-body"><label for="lin-r1">The viewer can switch between all three datasets and pick one of the supplied example people (Example person 1–5).</label> <a class="help" href="glossary.html#example-person" data-help="example-person" aria-label="What is Example person?" title="What is Example person?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="lin-r2"><div class="item-body"><label for="lin-r2">Where your tool allows it, the viewer can edit a person's values and watch the prediction update.</label></div></li>
+  <li><input type="checkbox" id="lin-r3"><div class="item-body"><label for="lin-r3">Shows the starting point and each feature's push, up or down, in the target's units.</label> <a class="help" href="glossary.html#baseline" data-help="baseline" aria-label="What is Starting point (baseline)?" title="What is Starting point (baseline)?"><span aria-hidden="true">?</span></a> <a class="help" href="glossary.html#contribution" data-help="contribution" aria-label="What is Push (contribution)?" title="What is Push (contribution)?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="lin-r4"><div class="item-body"><label for="lin-r4">The pushes visibly add up: starting point + all pushes = prediction.</label></div></li>
+  <li><input type="checkbox" id="lin-r5"><div class="item-body"><label for="lin-r5">One short explanation of what a coefficient means, with its units.</label> <a class="help" href="glossary.html#coefficient" data-help="coefficient" aria-label="What is Coefficient?" title="What is Coefficient?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="lin-r6"><div class="item-body"><label for="lin-r6">Makes clear that one person's pushes are not the same as "the most important feature overall".</label> <a class="help" href="glossary.html#importance" data-help="importance" aria-label="What is One person vs overall importance?" title="What is One person vs overall importance?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="lin-r7"><div class="item-body"><label for="lin-r7">Sex and ethnicity are menus (one push each), not separate on/off switches, and the reference group is named.</label> <a class="help" href="glossary.html#reference-group" data-help="reference-group" aria-label="What is Reference group?" title="What is Reference group?"><span aria-hidden="true">?</span></a></div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="linear-done"></p>
+<ul class="checklist" data-store="linear-done">
+  <li><input type="checkbox" id="lin-d1"><div class="item-body"><label for="lin-d1">Example person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="lin-d2"><div class="item-body"><label for="lin-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="lin-d5"><div class="item-body"><label for="lin-d5">Someone who hasn't seen your app can explain the learning objective in their own words after using the section, without help from you.</label></div></li>
+  <li><input type="checkbox" id="lin-d3"><div class="item-body"><label for="lin-d3">Every number has units, and the wording describes associations, not causes.</label> <a class="help" href="glossary.html#association" data-help="association" aria-label="What is Association, not cause?" title="What is Association, not cause?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="lin-d4"><div class="item-body"><label for="lin-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+<div class="table-wrap"><table class="check">
+    <caption><span class="tag">From the supplied data</span> Your finished section should still show these numbers</caption>
+    <thead><tr><th scope="col">Dataset</th><th scope="col">Pick</th><th scope="col">Your app shows</th></tr></thead>
+    <tbody><tr><th scope="row">Fasting glucose</th><td>Example person 1 (Female, age 58)</td><td>starting point <strong>113.8</strong> + pushes = prediction <strong>99.4</strong> mg/dL</td></tr><tr><th scope="row">Blood pressure</th><td>Example person 1 (Male, age 41)</td><td>starting point <strong>125.9</strong> + pushes = prediction <strong>123.3</strong> mmHg</td></tr><tr><th scope="row">Lung function (FEV₁)</th><td>Example person 1 (Male, age 9)</td><td>starting point <strong>2,878.6</strong> + pushes = prediction <strong>3,217.9</strong> mL</td></tr></tbody></table></div>
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Blood pressure → Example person 2</strong>. Which feature pushes the prediction up the most, and how does the app show it?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Compare features "in general" with the typical effect (coefficient × standard deviation), never with raw coefficients. <a class="help" href="glossary.html#typical-effect" data-help="typical-effect" aria-label="What is Typical effect?" title="What is Typical effect?"><span aria-hidden="true">?</span></a></li>
+      <li>Show where a straight line struggles: try <strong>Lung function → Example person 1</strong>, a 9-year-old.</li>
+      <li>Let the viewer build a custom person from scratch.</li>
+    </ul>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A receipt with line items, a tug-of-war, a mixing board, a waterfall, a balance scale… Pick a picture your viewer already understands.</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: how a coefficient and a value make a push</summary>
+  <div class="details-body"><div id="demo-linear"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>linear</code> <a class="help" href="glossary.html#model-outputs" data-help="model-outputs" aria-label="What is Supplied model outputs?" title="What is Supplied model outputs?"><span aria-hidden="true">?</span></a>:</p>
+<ul>
+  <li><code>baseline</code>: the starting point.</li>
+  <li><code>people.&lt;id&gt;.grouped_pushes</code> and <code>prediction</code>: each person's pushes, with sex and ethnicity combined into one push each.</li>
+  <li><code>coefficients</code>, <code>reference</code> (training averages) and <code>typical_effect_per_sd</code>.</li>
+</ul>
+<p>For edited values, call <code>m10.linearExplain(bundle, values)</code> in the browser or <code>m10.linear_explain(bundle, values)</code> in Python. See <a href="data.html#outputs">using the model outputs</a>.</p>
+<p class="small muted">Example first prompt for your agent:</p>
+<blockquote><p>Read <code>AGENT_BRIEF.md</code> and <code>outputs/SCHEMA.md</code> first. Then help me redesign the Push &amp; Pull section as a receipt: each feature is a line item that adds to or subtracts from the starting point.</p></blockquote>
+
+<h2>Common questions</h2>
+<details><summary>Why isn't the starting point the intercept?</summary><div class="details-body">
+  <p>The intercept is the prediction for someone whose every feature is 0 (age 0, BMI 0…), who doesn't exist. The starting point is the prediction for the training average, so each push shows how this person differs from average. <a class="help" href="glossary.html#intercept" data-help="intercept" aria-label="What is Intercept?" title="What is Intercept?"><span aria-hidden="true">?</span></a></p></div></details>
+<details><summary>Why does a man, or a Non-Hispanic White person, still get a sex or ethnicity push?</summary><div class="details-body">
+  <p>Pushes are measured from the training <em>average</em>, which mixes men and women and every group. Being male moves you away from that mix. That's correct, so don't "fix" it. The reference group only describes how the 0/1 columns are coded.</p></div></details>
+<details><summary>The lung-function prediction for a child looks far too high. Is that a bug?</summary><div class="details-body">
+  <p>No. Lungs grow through childhood and shrink later in life, and one straight line can't follow both. Showing where the line fails is a strength of an explainer.</p></div></details>
+<details><summary>Can I say a higher BMI <em>causes</em> higher blood pressure?</summary><div class="details-body">
+  <p>No. The model learned patterns in survey data. Say "people with higher BMI tend to get higher predictions". <a class="help" href="glossary.html#association" data-help="association" aria-label="What is Association, not cause?" title="What is Association, not cause?"><span aria-hidden="true">?</span></a></p></div></details>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

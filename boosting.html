@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Correction at a Time: gradient boosting · Explain the Model</title>
+  <meta name="description" content="Competition brief: explain how gradient boosting improves through successive corrections, and when to stop.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  <script type="module" src="assets/demos.js"></script>
+</head>
+<body data-page="boosting">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html" aria-current="page">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Competition · Gradient boosting <a class="help" href="glossary.html#gradient-boosting" data-help="gradient-boosting" aria-label="What is Gradient boosting?" title="What is Gradient boosting?"><span aria-hidden="true">?</span></a></p>
+<h1>One Correction at a Time</h1>
+<p class="core-question">How does each new tree improve the model, and when should it stop?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive experience that lets a visitor follow successive corrections and choose a stopping round using validation performance.</dd>
+  <dt>Audience</dt><dd>An anonymous visitor who knows machine learning and regression, but not how gradient boosting builds a prediction.</dd>
+  <dt>Learning objective</dt><dd>Explain how boosting adds one small correction per round, and use validation error to choose when to stop.</dd>
+  <dt>Viewer takeaway</dt><dd>Boosting starts at the average. Each small tree fixes part of the remaining error, until more trees stop helping on new people.</dd>
+</dl>
+
+<div class="callout">
+  <p class="callout-title">How this section is judged</p>
+  <p>Reviewers use your section as the visitor described above would: cold, with no one to ask. They vote for the section that best teaches the <strong>learning objective</strong> above. The checklists below are the minimum to compete; they don't earn votes on their own. <a href="./#judged">More on judging</a></p>
+</div>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="boosting-required"></p>
+<ul class="checklist" data-store="boosting-required">
+  <li><input type="checkbox" id="bst-r1"><div class="item-body"><label for="bst-r1">The viewer can switch between all three datasets and pick one of the supplied example people (Example person 1–5).</label> <a class="help" href="glossary.html#example-person" data-help="example-person" aria-label="What is Example person?" title="What is Example person?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="bst-r2"><div class="item-body"><label for="bst-r2">Starts at round 0: the training average.</label> <a class="help" href="glossary.html#round" data-help="round" aria-label="What is Round?" title="What is Round?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="bst-r3"><div class="item-body"><label for="bst-r3">The viewer steps through rounds and sees, for each round: the previous prediction → the new correction → the updated prediction.</label> <a class="help" href="glossary.html#correction" data-help="correction" aria-label="What is Correction?" title="What is Correction?"><span aria-hidden="true">?</span></a> <a class="help" href="glossary.html#learning-rate" data-help="learning-rate" aria-label="What is Learning rate?" title="What is Learning rate?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="bst-r4"><div class="item-body"><label for="bst-r4">Explains that each new tree is fitted to the training residuals (what the earlier rounds got wrong).</label> <a class="help" href="glossary.html#residual" data-help="residual" aria-label="What is Residual?" title="What is Residual?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="bst-r5"><div class="item-body"><label for="bst-r5">Shows training and validation error by round, with labelled axes and units.</label> <a class="help" href="glossary.html#rmse" data-help="rmse" aria-label="What is RMSE (root mean squared error)?" title="What is RMSE (root mean squared error)?"><span aria-hidden="true">?</span></a> <a class="help" href="glossary.html#validation-data" data-help="validation-data" aria-label="What is Validation data?" title="What is Validation data?"><span aria-hidden="true">?</span></a></div></li>
+  <li><input type="checkbox" id="bst-r6"><div class="item-body"><label for="bst-r6">The viewer picks a stopping round and compares it with the round where validation error is lowest. This is called a validation-based choice, not a test result.</label> <a class="help" href="glossary.html#stopping-round" data-help="stopping-round" aria-label="What is Stopping round?" title="What is Stopping round?"><span aria-hidden="true">?</span></a> <a class="help" href="glossary.html#test-result" data-help="test-result" aria-label="What is Test result?" title="What is Test result?"><span aria-hidden="true">?</span></a></div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="boosting-done"></p>
+<ul class="checklist" data-store="boosting-done">
+  <li><input type="checkbox" id="bst-d1"><div class="item-body"><label for="bst-d1">Example person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="bst-d2"><div class="item-body"><label for="bst-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="bst-d5"><div class="item-body"><label for="bst-d5">Someone who hasn't seen your app can explain the learning objective in their own words after using the section, without help from you.</label></div></li>
+  <li><input type="checkbox" id="bst-d3"><div class="item-body"><label for="bst-d3">The corrections are used as supplied, never multiplied by the learning rate again.</label></div></li>
+  <li><input type="checkbox" id="bst-d4"><div class="item-body"><label for="bst-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+<div class="table-wrap"><table class="check">
+    <caption><span class="tag">From the supplied data</span> Your finished section should still show these numbers</caption>
+    <thead><tr><th scope="col">Dataset</th><th scope="col">Pick</th><th scope="col">Your app shows</th></tr></thead>
+    <tbody><tr><th scope="row">Fasting glucose</th><td>Example person 1 (Female, age 58)</td><td>round 0 <strong>113.8</strong> → round 500 <strong>102.5</strong> mg/dL; lowest validation RMSE 20.4 mg/dL at round <strong>21</strong></td></tr><tr><th scope="row">Blood pressure</th><td>Example person 1 (Male, age 41)</td><td>round 0 <strong>125.9</strong> → round 500 <strong>127.1</strong> mmHg; lowest validation RMSE 16.1 mmHg at round <strong>38</strong></td></tr><tr><th scope="row">Lung function (FEV₁)</th><td>Example person 1 (Male, age 9)</td><td>round 0 <strong>2,878.6</strong> → round 500 <strong>1,831.8</strong> mL; lowest validation RMSE 537.7 mL at round <strong>79</strong></td></tr></tbody></table></div>
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Glucose</strong> and choose a stopping round. Where would you stop, and why not at the round with the lowest <em>training</em> error?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Compare learning rate 0.1 with the separately trained 0.02 model (<code>comparison_learning_rate_0_02</code>). Don't rescale the 0.1 numbers.</li>
+      <li>Plot residuals before and after a round, using <code>residual_snapshots</code>.</li>
+      <li>Live predictions for edited values with <code>m10.boostingRounds(key, values)</code>.</li>
+    </ul>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A sculptor chipping at a statue, tuning a guitar string, a GPS re-routing, editing an essay draft by draft…</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: successive corrections, and why training and validation error differ</summary>
+  <div class="details-body"><div id="demo-boost"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>boosting</code> <a class="help" href="glossary.html#model-outputs" data-help="model-outputs" aria-label="What is Supplied model outputs?" title="What is Supplied model outputs?"><span aria-hidden="true">?</span></a>:</p>
+<ul>
+  <li><code>init</code>: round 0, the training average.</li>
+  <li><code>people.&lt;id&gt;.staged[m]</code>: the prediction after round <em>m</em> (501 values).</li>
+  <li><code>people.&lt;id&gt;.corrections[m-1]</code>: what tree <em>m</em> added. This already includes the learning rate.</li>
+  <li><code>rmse.train</code>, <code>rmse.validation</code>, <code>best_validation_round</code>: the error curves.</li>
+</ul>
+<p>See <a href="data.html#outputs">using the model outputs</a>.</p>
+
+<h2>Common questions</h2>
+<details><summary>Why start at the average?</summary><div class="details-body">
+  <p>Before any trees, the best single guess for everyone (with squared error) is the average outcome in the training data. Every tree after that corrects it.</p></div></details>
+<details><summary>Why are the corrections so small?</summary><div class="details-body">
+  <p>Only 10% of each tree's suggestion is used (learning rate 0.1). Small, careful steps usually generalize better than big jumps. <a class="help" href="glossary.html#learning-rate" data-help="learning-rate" aria-label="What is Learning rate?" title="What is Learning rate?"><span aria-hidden="true">?</span></a></p></div></details>
+<details><summary>Why does training error keep falling when validation error doesn't?</summary><div class="details-body">
+  <p>Later trees start fitting noise: quirks of the training people that new people don't share. That's overfitting. <a class="help" href="glossary.html#overfitting" data-help="overfitting" aria-label="What is Overfitting?" title="What is Overfitting?"><span aria-hidden="true">?</span></a></p></div></details>
+<details><summary>Does every round improve every person?</summary><div class="details-body">
+  <p>No. A correction can move a person's prediction the wrong way, and a round doesn't have to improve validation error. Watch the overall error curves.</p></div></details>
+<details><summary>Why "validation", not "test"?</summary><div class="details-body">
+  <p>We look at the validation error to choose the stopping round, so it was used to make a decision. A true test result needs data that was never used for any choice. <a class="help" href="glossary.html#test-result" data-help="test-result" aria-label="What is Test result?" title="What is Test result?"><span aria-hidden="true">?</span></a></p></div></details>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data &amp; files · Explain the Model</title>
+  <meta name="description" content="Download the starter, the three NHANES datasets, the data dictionaries and the supplied model outputs.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b6f'/%3E%3Cpath d='M7 23 L13 15 L18 19 L25 9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="module" src="assets/site.js"></script>
+  
+</head>
+<body data-page="data">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span>Explain the Model</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
+  </header>
+  <div class="shell">
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul><li><a href="./">Overview</a></li><li class="nav-group" aria-hidden="true">Competitions</li><li><a href="linear.html">Push &amp; Pull</a></li><li><a href="forest.html">Wisdom of the Forest</a></li><li><a href="boosting.html">One Correction at a Time</a></li><li class="nav-group" aria-hidden="true">Resources</li><li><a href="data.html" aria-current="page">Data &amp; files</a></li><li><a href="hosting.html">Publish &amp; back up</a></li><li><a href="submit.html">Submit &amp; evaluation</a></li><li><a href="gallery.html">Gallery &amp; votes</a></li><li><a href="glossary.html">Glossary</a></li></ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Resources</p>
+<h1>Data &amp; files</h1>
+<p class="lead">Everything you need is in one starter folder: the data, the model outputs, and a plain app that already shows the right numbers.</p>
+
+<p><a class="button primary" href="downloads/explain-the-model-starter.zip" download>Download the starter (.zip, 538 KB)</a></p>
+<p class="small">Prefer to browse? Every file is listed <a href="#files">below</a> and in the <a href="https://github.com/snsie/regression-activity/tree/main/starter">starter folder on GitHub</a>. You can also <a href="starter/index.html">see the plain starter running</a>.</p>
+
+<h2 id="datasets">The three datasets</h2>
+<p>Real health data from the CDC's National Health and Nutrition Examination Survey (NHANES). One row is one person. These describe this survey sample, not the whole US population.</p>
+<p>Every row is marked as training data <a class="help" href="glossary.html#training-data" data-help="training-data" aria-label="What is Training data?" title="What is Training data?"><span aria-hidden="true">?</span></a> (80%, what the models learned from) or validation data <a class="help" href="glossary.html#validation-data" data-help="validation-data" aria-label="What is Validation data?" title="What is Validation data?"><span aria-hidden="true">?</span></a> (20%, used to check them).</p>
+
+<h3 id="glucose">Fasting glucose</h3>
+<p>2,397 adults from NHANES 2017–2018 who fasted before their blood test. Age 80 means 80 or older. <a class="file" href="starter/data/glucose.csv" download>glucose.csv</a> <span class="size">91 KB</span></p>
+<div class="table-wrap"><table class="dictionary">
+    <caption>Columns in <code>glucose.csv</code></caption>
+    <thead><tr><th scope="col">Column</th><th scope="col">Meaning</th><th scope="col">Units</th></tr></thead>
+    <tbody>
+      <tr><td><code>row_id</code></td><td>Row number</td><td></td></tr>
+      <tr><td><code>split</code></td><td><code>train</code> (1,917 people) or <code>validation</code> (480 people) <a class="help" href="glossary.html#validation-data" data-help="validation-data" aria-label="What is Validation data?" title="What is Validation data?"><span aria-hidden="true">?</span></a></td><td></td></tr>
+      <tr><td><code>hba1c</code></td><td>HbA1c (3-month average blood sugar)</td><td>%</td></tr><tr><td><code>age</code></td><td>Age</td><td>years</td></tr><tr><td><code>bmi</code></td><td>Body mass index</td><td>kg/m²</td></tr><tr><td><code>waist_cm</code></td><td>Waist circumference</td><td>cm</td></tr><tr><td><code>female</code></td><td>Female (1 = female, 0 = male)</td><td>0/1</td></tr>
+      <tr class="target"><td><code>fasting_glucose</code></td><td><strong>Target:</strong> Fasting glucose <a class="help" href="glossary.html#target" data-help="target" aria-label="What is Target?" title="What is Target?"><span aria-hidden="true">?</span></a></td><td>mg/dL</td></tr>
+    </tbody></table></div>
+    <p class="data-facts"><span class="tag">From the supplied data</span> 2,397 people. Fasting glucose: average 113.7 mg/dL, typical spread (SD) 37.5 mg/dL, range 47.0–451.0 mg/dL.</p>
+    <p class="source">Source: NHANES 2017-2018 (CDC), adults in the fasting subsample. Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey 2017-2018. <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017">NHANES website</a>.</p>
+
+<h3 id="sbp">Blood pressure</h3>
+<p>4,370 adults from NHANES 2017–2018. Race/ethnicity is stored as five 0/1 columns; all zeros means Non-Hispanic White, the reference group <a class="help" href="glossary.html#reference-group" data-help="reference-group" aria-label="What is Reference group?" title="What is Reference group?"><span aria-hidden="true">?</span></a>. These are associations in the data, not biological effects. <a class="file" href="starter/data/sbp.csv" download>sbp.csv</a> <span class="size">221 KB</span></p>
+<div class="table-wrap"><table class="dictionary">
+    <caption>Columns in <code>sbp.csv</code></caption>
+    <thead><tr><th scope="col">Column</th><th scope="col">Meaning</th><th scope="col">Units</th></tr></thead>
+    <tbody>
+      <tr><td><code>row_id</code></td><td>Row number</td><td></td></tr>
+      <tr><td><code>split</code></td><td><code>train</code> (3,496 people) or <code>validation</code> (874 people) <a class="help" href="glossary.html#validation-data" data-help="validation-data" aria-label="What is Validation data?" title="What is Validation data?"><span aria-hidden="true">?</span></a></td><td></td></tr>
+      <tr><td><code>age</code></td><td>Age</td><td>years</td></tr><tr><td><code>bmi</code></td><td>Body mass index</td><td>kg/m²</td></tr><tr><td><code>waist_cm</code></td><td>Waist circumference</td><td>cm</td></tr><tr><td><code>female</code></td><td>Female (1 = female, 0 = male)</td><td>0/1</td></tr><tr><td><code>income_poverty_ratio</code></td><td>Family income ÷ poverty line (capped at 5)</td><td>ratio</td></tr><tr><td><code>eth_mexican_american</code></td><td>Race/ethnicity: Mexican American (vs Non-Hispanic White)</td><td>0/1</td></tr><tr><td><code>eth_nh_asian</code></td><td>Race/ethnicity: Non-Hispanic Asian (vs Non-Hispanic White)</td><td>0/1</td></tr><tr><td><code>eth_nh_black</code></td><td>Race/ethnicity: Non-Hispanic Black (vs Non-Hispanic White)</td><td>0/1</td></tr><tr><td><code>eth_other_multiracial</code></td><td>Race/ethnicity: Other / multiracial (vs Non-Hispanic White)</td><td>0/1</td></tr><tr><td><code>eth_other_hispanic</code></td><td>Race/ethnicity: Other Hispanic (vs Non-Hispanic White)</td><td>0/1</td></tr>
+      <tr class="target"><td><code>systolic_bp</code></td><td><strong>Target:</strong> Systolic blood pressure (mean of up to 3 readings) <a class="help" href="glossary.html#target" data-help="target" aria-label="What is Target?" title="What is Target?"><span aria-hidden="true">?</span></a></td><td>mmHg</td></tr>
+    </tbody></table></div>
+    <p class="data-facts"><span class="tag">From the supplied data</span> 4,370 people. Systolic blood pressure (mean of up to 3 readings): average 126.0 mmHg, typical spread (SD) 19.7 mmHg, range 72.7–238.0 mmHg.</p>
+    <p class="source">Source: NHANES 2017-2018 (CDC), adults with complete measurements. Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey 2017-2018. <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017">NHANES website</a>.</p>
+
+<h3 id="fev1">Lung function (FEV₁)</h3>
+<p>5,820 people aged 6–79 from NHANES 2011–2012, the most recent survey with lung tests. Height is left out on purpose, so the models have to learn how lung size changes with age. <a class="file" href="starter/data/fev1.csv" download>fev1.csv</a> <span class="size">201 KB</span></p>
+<div class="table-wrap"><table class="dictionary">
+    <caption>Columns in <code>fev1.csv</code></caption>
+    <thead><tr><th scope="col">Column</th><th scope="col">Meaning</th><th scope="col">Units</th></tr></thead>
+    <tbody>
+      <tr><td><code>row_id</code></td><td>Row number</td><td></td></tr>
+      <tr><td><code>split</code></td><td><code>train</code> (4,656 people) or <code>validation</code> (1,164 people) <a class="help" href="glossary.html#validation-data" data-help="validation-data" aria-label="What is Validation data?" title="What is Validation data?"><span aria-hidden="true">?</span></a></td><td></td></tr>
+      <tr><td><code>age</code></td><td>Age</td><td>years</td></tr><tr><td><code>female</code></td><td>Female (1 = female, 0 = male)</td><td>0/1</td></tr><tr><td><code>bmi</code></td><td>Body mass index</td><td>kg/m²</td></tr><tr><td><code>income_poverty_ratio</code></td><td>Family income ÷ poverty line (capped at 5)</td><td>ratio</td></tr>
+      <tr class="target"><td><code>fev1</code></td><td><strong>Target:</strong> FEV₁: air blown out in the first second <a class="help" href="glossary.html#target" data-help="target" aria-label="What is Target?" title="What is Target?"><span aria-hidden="true">?</span></a></td><td>mL</td></tr>
+    </tbody></table></div>
+    <p class="data-facts"><span class="tag">From the supplied data</span> 5,820 people. FEV₁: air blown out in the first second: average 2,879.1 mL, typical spread (SD) 966.1 mL, range 409.0–6,923.0 mL.</p>
+    <p class="source">Source: NHANES 2011-2012 (CDC), ages 6-79 with complete spirometry. Height is left out on purpose, so the age curve has to be learned. Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey 2011-2012. <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2011">NHANES website</a>.</p>
+
+<h3 id="people">The five example people</h3>
+<p>Each dataset comes with five <strong>example people</strong> <a class="help" href="glossary.html#example-person" data-help="example-person" aria-label="What is Example person?" title="What is Example person?"><span aria-hidden="true">?</span></a>: real survey participants from the validation data, not students and not made up. Every app offers the same five, so reviewers can find the same example person in any app. They were picked to be interesting:</p>
+<ul>
+  <li><strong>Example people 1–3:</strong> a low, a typical and a high outcome.</li>
+  <li><strong>Example person 4:</strong> the one the forest's trees disagree on most.</li>
+  <li><strong>Example person 5:</strong> the one the trees agree on most.</li>
+</ul>
+<p>Their details are in <code>people</code> in each output file.</p>
+
+<h2 id="starter">Using the starter code</h2>
+<p>The starter is a working app with three plain sections. Pick one route; both read the same files.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th scope="col"></th><th scope="col">Route A: GitHub Pages</th><th scope="col">Route B: Streamlit</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Files you edit</th><td><code>index.html</code>, <code>app.js</code></td><td><code>streamlit_app.py</code></td></tr>
+    <tr><th scope="row">Helper</th><td><code>m10.js</code></td><td><code>m10.py</code></td></tr>
+    <tr><th scope="row">Run on your computer</th><td><code>python -m http.server 8000</code>, then open <code>localhost:8000</code></td><td><code>uv run --with streamlit,pandas,numpy streamlit run streamlit_app.py</code></td></tr>
+  </tbody>
+</table></div>
+<p>Have your AI agent read <a class="file" href="starter/AGENT_BRIEF.md" download>AGENT_BRIEF.md</a> <span class="size">7 KB</span> first. It holds the rules that keep the numbers right, so you can focus on design.</p>
+
+<h2 id="outputs">Using the model outputs</h2>
+<p>The three models were fitted once, on the training rows, and every number your app needs was saved to JSON <a class="help" href="glossary.html#model-outputs" data-help="model-outputs" aria-label="What is Supplied model outputs?" title="What is Supplied model outputs?"><span aria-hidden="true">?</span></a>. Don't retrain anything; read these files.</p>
+<ul>
+  <li><code>outputs/glucose.json</code>, <code>outputs/sbp.json</code>, <code>outputs/fev1.json</code>: one file per dataset, with sections <code>linear</code>, <code>forest</code> and <code>boosting</code>.</li>
+  <li><a class="file" href="starter/outputs/SCHEMA.md" download>SCHEMA.md</a> <span class="size">3 KB</span>: the field guide.</li>
+  <li><a class="file" href="starter/check.md" download>check.md</a> <span class="size">2 KB</span>: numbers your finished app must still show.</li>
+</ul>
+<details>
+  <summary>Example: load a dataset in the browser (Route A)</summary>
+  <div class="details-body">
+<pre><code>import * as m10 from "./m10.js";
+
+const bundle = await m10.loadBundle("sbp");      // "glucose", "sbp" or "fev1"
+const person = bundle.people[0];                 // Example person 1
+const ex = m10.linearExplain(bundle, person.values);
+console.log(ex.baseline, ex.groupedPushes, ex.prediction);
+console.log(bundle.forest.people[person.id].prediction);</code></pre>
+  </div>
+</details>
+<details>
+  <summary>Example: load a dataset in Python (Route B)</summary>
+  <div class="details-body">
+<pre><code>import m10
+
+bundle = m10.load_bundle("sbp")                  # "glucose", "sbp" or "fev1"
+person = bundle["people"][0]                     # Example person 1
+ex = m10.linear_explain(bundle, person["values"])
+print(ex["baseline"], ex["grouped_pushes"], ex["prediction"])
+print(bundle["boosting"]["best_validation_round"])</code></pre>
+  </div>
+</details>
+<details>
+  <summary>How were the models fitted?</summary>
+  <div class="details-body">
+    <ul>
+      <li><strong>Linear:</strong> <code>LinearRegression()</code> in natural units.</li>
+      <li><strong>Forest:</strong> <code>RandomForestRegressor(n_estimators=100, max_features="sqrt", bootstrap=True, random_state=0)</code>.</li>
+      <li><strong>Boosting:</strong> <code>GradientBoostingRegressor(loss="squared_error", n_estimators=500, learning_rate=0.1, max_depth=3, random_state=0)</code>.</li>
+    </ul>
+    <p>All three use scikit-learn, fitted on the same training rows (a fixed 80/20 split, seed 0). <a class="file" href="starter/data/manifest.json" download>manifest.json</a> <span class="size">3 KB</span> records the versions and row counts.</p>
+  </div>
+</details>
+
+<h2 id="files">All files</h2>
+<div class="table-wrap"><table class="files"><thead><tr><th scope="col">File</th><th scope="col">What it is</th></tr></thead><tbody><tr><td><a class="file" href="starter/.gitignore" download>.gitignore</a> <span class="size">54 B</span></td><td>Keeps caches and secrets out of Git.</td></tr><tr><td><a class="file" href="starter/AGENT_BRIEF.md" download>AGENT_BRIEF.md</a> <span class="size">7 KB</span></td><td>Rules for your AI coding agent. Have it read this first.</td></tr><tr><td><a class="file" href="starter/README.md" download>README.md</a> <span class="size">1 KB</span></td><td>Your app's README: put your public link at the top.</td></tr><tr><td><a class="file" href="starter/SETUP.md" download>SETUP.md</a> <span class="size">2 KB</span></td><td>Run and publish your app (both routes).</td></tr><tr><td><a class="file" href="starter/app.js" download>app.js</a> <span class="size">10 KB</span></td><td>GitHub Pages route: the three plain starter sections.</td></tr><tr><td><a class="file" href="starter/check.md" download>check.md</a> <span class="size">2 KB</span></td><td>Numbers your finished app must still show.</td></tr><tr><td><a class="file" href="starter/data/README.md" download>data/README.md</a> <span class="size">2 KB</span></td><td>Data dictionary and sources.</td></tr><tr><td><a class="file" href="starter/data/datasets.json" download>data/datasets.json</a> <span class="size">6 KB</span></td><td>Labels, units and categories for each dataset.</td></tr><tr><td><a class="file" href="starter/data/fev1.csv" download>data/fev1.csv</a> <span class="size">201 KB</span></td><td>Lung function (FEV₁) dataset.</td></tr><tr><td><a class="file" href="starter/data/glucose.csv" download>data/glucose.csv</a> <span class="size">91 KB</span></td><td>Fasting glucose dataset.</td></tr><tr><td><a class="file" href="starter/data/manifest.json" download>data/manifest.json</a> <span class="size">3 KB</span></td><td>Provenance: source commit, versions, row counts.</td></tr><tr><td><a class="file" href="starter/data/sbp.csv" download>data/sbp.csv</a> <span class="size">221 KB</span></td><td>Blood pressure dataset.</td></tr><tr><td><a class="file" href="starter/index.html" download>index.html</a> <span class="size">2 KB</span></td><td>GitHub Pages route: the page.</td></tr><tr><td><a class="file" href="starter/m10.js" download>m10.js</a> <span class="size">3 KB</span></td><td>GitHub Pages route: helper math (pushes, boosting rounds).</td></tr><tr><td><a class="file" href="starter/m10.py" download>m10.py</a> <span class="size">6 KB</span></td><td>Streamlit route: helper math and the fixed models.</td></tr><tr><td><a class="file" href="starter/outputs/SCHEMA.md" download>outputs/SCHEMA.md</a> <span class="size">3 KB</span></td><td>Field guide to the model output files.</td></tr><tr><td><a class="file" href="starter/outputs/fev1.json" download>outputs/fev1.json</a> <span class="size">146 KB</span></td><td>Model outputs: Lung function (FEV₁).</td></tr><tr><td><a class="file" href="starter/outputs/fev1_boosting_trees.json" download>outputs/fev1_boosting_trees.json</a> <span class="size">288 KB</span></td><td>The 500 boosting trees, for live predictions on edited values (optional).</td></tr><tr><td><a class="file" href="starter/outputs/glucose.json" download>outputs/glucose.json</a> <span class="size">130 KB</span></td><td>Model outputs: Fasting glucose.</td></tr><tr><td><a class="file" href="starter/outputs/glucose_boosting_trees.json" download>outputs/glucose_boosting_trees.json</a> <span class="size">291 KB</span></td><td>The 500 boosting trees, for live predictions on edited values (optional).</td></tr><tr><td><a class="file" href="starter/outputs/sbp.json" download>outputs/sbp.json</a> <span class="size">140 KB</span></td><td>Model outputs: Blood pressure.</td></tr><tr><td><a class="file" href="starter/outputs/sbp_boosting_trees.json" download>outputs/sbp_boosting_trees.json</a> <span class="size">291 KB</span></td><td>The 500 boosting trees, for live predictions on edited values (optional).</td></tr><tr><td><a class="file" href="starter/requirements.txt" download>requirements.txt</a> <span class="size">23 B</span></td><td>Streamlit route: packages to install.</td></tr><tr><td><a class="file" href="starter/streamlit_app.py" download>streamlit_app.py</a> <span class="size">7 KB</span></td><td>Streamlit route: the three plain starter sections.</td></tr></tbody></table></div>
+
+<h2 id="reproduce">Rebuild the data yourself</h2>
+<p>Everything in the starter's <code>data/</code> and <code>outputs/</code> folders can be rebuilt from the original NHANES files with one command. See the <a href="https://github.com/snsie/regression-activity/tree/main/reproduce">reproduce folder</a> on GitHub:</p>
+<pre><code>pip install -r reproduce/requirements.txt
+python reproduce/reproduce.py --check</code></pre>
+<p class="small">The script downloads the eight NHANES files from the CDC and checks each against a recorded SHA-256 fingerprint. It then rebuilds the three CSVs and refits the three models with pinned package versions. With <code>--check</code>, it confirms the rebuilt files match the ones you downloaded.</p>
+
+<h2 id="sources">Sources and attribution</h2>
+<ul class="small">
+  <li>Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey 2017–2018 and 2011–2012, public-use data files. <a href="https://wwwn.cdc.gov/nchs/nhanes/">wwwn.cdc.gov/nchs/nhanes</a></li>
+  <li>Dataset definitions come from the <a href="https://github.com/snsie/regression-app">regression-app</a> pipeline (<code>pipeline/datasets.py</code>), copied into <code>reproduce/nhanes.py</code>. <code>data/manifest.json</code> records the raw files, their fingerprints and the package versions.</li>
+</ul>
+
+    </main>
+  </div>
+  <footer class="site-footer">
+    <p>M10 in-class activity: explaining linear regression, random forests and gradient boosting.
+      Data: CDC/NCHS National Health and Nutrition Examination Survey (NHANES), public-use files.</p>
+    <p><a href="https://github.com/snsie/regression-activity">Source and files on GitHub</a> · <a href="glossary.html">Glossary</a> · <a href="https://github.com/snsie/regression-activity/commit/2a1660a">version 2a1660a</a></p>
+  </footer>
+</body>
+</html>
