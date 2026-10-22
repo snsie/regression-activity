@@ -8,7 +8,7 @@
 | Wisdom of the Forest (random forest) | _link_ | _one sentence_ |
 | One Correction at a Time (gradient boosting) | _link_ | _one sentence_ |
 
-An app that explains three regression models to someone with no machine-learning background. Datasets: NHANES fasting glucose, blood pressure and lung function.
+An app that explains three regression models to an anonymous visitor who knows about machine learning and regression, but not how these algorithms work. Datasets: NHANES fasting glucose, blood pressure and lung function.
 
 Submit the link to **this repository** on Canvas. Reviewers open the app link above.
 

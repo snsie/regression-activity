@@ -2,7 +2,7 @@
 
 **Website: <https://snsie.github.io/regression-activity/>**
 
-Students build one public app that explains three regression models (linear regression, random forest and gradient boosting) to someone with no machine-learning background. Each app covers NHANES fasting glucose, systolic blood pressure and lung function (FEV₁).
+Students build one public app that explains three regression models (linear regression, random forest and gradient boosting) to an anonymous visitor who knows about machine learning and regression, but doesn't understand how these algorithms work. Classmates judge each section by how well it teaches its learning objective to that visitor. Each app covers NHANES fasting glucose, systolic blood pressure and lung function (FEV₁).
 - **Timing:** about 105 minutes of building, then 30 minutes of peer review and voting.
 - **Requirements:** each app needs a free public link and a GitHub backup.
 

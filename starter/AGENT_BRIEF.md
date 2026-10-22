@@ -3,13 +3,21 @@
 Read this before changing any code. The student will design the explainers; your job is to build what they ask for **without breaking the rules below**.
 
 ## The project
-One public app with three sections. Each section explains one fixed regression model to **someone with no machine-learning background**, on three datasets (`glucose`, `sbp`, `fev1`):
+One public app with three sections. Each section explains one fixed regression model to **an anonymous visitor who knows about machine learning and regression, but doesn't understand how these algorithms work**, on three datasets (`glucose`, `sbp`, `fev1`):
 
 | Section | URL | Core question |
 |---|---|---|
 | Push & Pull | `#linear` or `/linear` | Which features push a prediction up or down, and by how much? |
 | Wisdom of the Forest | `#forest` or `/forest` | How do many different trees combine into one prediction? |
 | One Correction at a Time | `#boosting` or `/boosting` | How does each new tree improve the model, and when should training stop? |
+
+## How the app is judged
+Classmates use each section as that visitor would: they open the link cold, with no one to explain it. They vote for the section that best teaches its **learning objective**. After using a section, the visitor should be able to:
+- **Push & Pull:** rebuild a prediction from a starting point and one signed push per feature, and tell a coefficient apart from one person's push.
+- **Wisdom of the Forest:** explain how varied trees combine by averaging, and tell disagreement between trees apart from real uncertainty about a prediction.
+- **One Correction at a Time:** explain how boosting adds one small correction per round, and use validation error to choose when to stop.
+
+So every section must make sense on its own, without the student, the course website or the class. Don't spend space explaining what machine learning is. Define each term briefly where it's used, then focus on how the model works. Visual polish and extra features only help when they serve the objective.
 
 ## Files
 - `outputs/<key>.json`: every number the app needs, already computed and checked. Field guide: `outputs/SCHEMA.md`.
