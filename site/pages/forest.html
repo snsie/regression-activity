@@ -1,0 +1,76 @@
+<!--meta {"title":"Wisdom of the Forest: random forest","description":"Competition brief: explain how many different decision trees combine into one random forest prediction.","scripts":["demos.js"]} -->
+<p class="eyebrow">Competition · Random forest {{help random-forest}}</p>
+<h1>Wisdom of the Forest</h1>
+<p class="core-question">How do many different trees combine into one prediction?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive experience that explains how individual decision trees {{help decision-tree}} contribute to a forest's combined prediction.</dd>
+  <dt>Learning objective</dt><dd>Explain how varied trees combine by averaging, and tell disagreement between trees apart from real uncertainty about a prediction.</dd>
+  <dt>Viewer takeaway</dt><dd>The forest asks 100 slightly different trees and averages their guesses.</dd>
+</dl>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="forest-required"></p>
+<ul class="checklist" data-store="forest-required">
+  <li><input type="checkbox" id="for-r1"><div class="item-body"><label for="for-r1">The viewer can switch between all three datasets and pick one of the supplied people (Person 1–5).</label></div></li>
+  <li><input type="checkbox" id="for-r2"><div class="item-body"><label for="for-r2">Shows several individual trees' guesses and the average of all 100, and makes clear which is which.</label></div></li>
+  <li><input type="checkbox" id="for-r3"><div class="item-body"><label for="for-r3">The viewer can change how many trees are included (in the supplied order) and watch the running average. Fewer than 100 is labelled a partial forest.</label> {{help partial-forest}}</div></li>
+  <li><input type="checkbox" id="for-r4"><div class="item-body"><label for="for-r4">Explains why the trees differ: each learns from its own sample of people and only some features at each question.</label> {{help bootstrap}} {{help feature-subset}}</div></li>
+  <li><input type="checkbox" id="for-r5"><div class="item-body"><label for="for-r5">Shows at least one person the trees disagree on, and calls it disagreement, not a confidence or prediction interval.</label> {{help disagreement}}</div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="forest-done"></p>
+<ul class="checklist" data-store="forest-done">
+  <li><input type="checkbox" id="for-d1"><div class="item-body"><label for="for-d1">Person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="for-d2"><div class="item-body"><label for="for-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="for-d3"><div class="item-body"><label for="for-d3">Every number has units, and any partial forest is labelled as one.</label></div></li>
+  <li><input type="checkbox" id="for-d4"><div class="item-body"><label for="for-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+{{check forest}}
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Glucose → Person 4</strong>. The trees disagree a lot. Why can the average of 100 trees be steadier than any single tree?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Trace a person through the first questions of one tree (<code>traced_trees</code> gives trees 1–5).</li>
+      <li>Show how the error on new people changes as trees are added (<code>validation_rmse_by_trees</code>). {{help rmse}}</li>
+      <li>Show each tree's first question (<code>root_split</code>) to make "different trees" concrete.</li>
+      <li>Forest predictions for edited values. This needs the Streamlit route; see <code>AGENT_BRIEF.md</code>.</li>
+    </ul>
+    <p class="small muted">You don't need to draw all 100 trees.</p>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A crowd guessing the number of jellybeans, a panel of judges, a vote tally, a choir of slightly different voices…</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: how averaging trees makes a forest prediction</summary>
+  <div class="details-body"><div id="demo-forest"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>forest</code> {{help model-outputs}}:</p>
+<ul>
+  <li><code>people.&lt;id&gt;.tree_predictions</code>: all 100 guesses, in a fixed order.</li>
+  <li><code>people.&lt;id&gt;.prediction</code>: their average, the forest's prediction.</li>
+  <li><code>bootstrap_unique_training_rows</code> and <code>features_tried_per_split</code>: why the trees differ.</li>
+</ul>
+<p>The helper <code>m10.runningAverage(treePredictions, n)</code> averages the first <em>n</em> trees. See <a href="data.html#outputs">using the model outputs</a>.</p>
+
+<h2>Common questions</h2>
+<details><summary>Why do the trees disagree?</summary><div class="details-body">
+  <p>Each tree learned from a different random sample of people and could only use a few features at each question, so each one learned slightly different rules.</p></div></details>
+<details><summary>Why is the average steadier than one tree?</summary><div class="details-body">
+  <p>One tree's quirks push its guess too high or too low. Across 100 trees, many of those mistakes point in different directions and partly cancel out. Steadier doesn't guarantee more accurate.</p></div></details>
+<details><summary>Isn't the spread of guesses a confidence interval?</summary><div class="details-body">
+  <p>No. The trees learned from overlapping data, so their spread isn't a calibrated measure of how far off the forest might be. Call it disagreement. {{help disagreement}}</p></div></details>
+<details><summary>Why can't the forest predict above the highest value it saw?</summary><div class="details-body">
+  <p>Each tree's guess is an average of training people's outcomes, so it always lies between the lowest and highest training outcome, and so does their average.</p></div></details>

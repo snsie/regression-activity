@@ -1,0 +1,11 @@
+{
+  "name": "regression-activity",
+  "private": true,
+  "type": "module",
+  "description": "Student website for the M10 'Explain the Model' activity",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node --test tests/"
+  }
+}

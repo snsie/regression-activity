@@ -1,0 +1,84 @@
+{
+  "source_repo": "regression-app (pipeline/datasets.py)",
+  "source_commit": "54bce02f8a93cf9839251894a4fff664dab97eef",
+  "versions": {
+    "python": "3.11.14",
+    "pandas": "3.0.6",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1"
+  },
+  "split": {
+    "seed": 0,
+    "validation_share": 0.2,
+    "method": "sklearn train_test_split(test_size=0.2, random_state=0) on row order"
+  },
+  "datasets": {
+    "glucose": {
+      "file": "glucose.csv",
+      "app_dataset_id": "nhanes_glucose",
+      "n_rows": 2397,
+      "n_train": 1917,
+      "n_validation": 480,
+      "feature_order": [
+        "hba1c",
+        "age",
+        "bmi",
+        "waist_cm",
+        "female"
+      ],
+      "target": "fasting_glucose",
+      "target_summary": {
+        "mean": 113.717,
+        "sd": 37.534,
+        "min": 47.0,
+        "max": 451.0
+      }
+    },
+    "sbp": {
+      "file": "sbp.csv",
+      "app_dataset_id": "nhanes_sbp",
+      "n_rows": 4370,
+      "n_train": 3496,
+      "n_validation": 874,
+      "feature_order": [
+        "age",
+        "bmi",
+        "waist_cm",
+        "female",
+        "income_poverty_ratio",
+        "eth_mexican_american",
+        "eth_nh_asian",
+        "eth_nh_black",
+        "eth_other_multiracial",
+        "eth_other_hispanic"
+      ],
+      "target": "systolic_bp",
+      "target_summary": {
+        "mean": 125.977,
+        "sd": 19.722,
+        "min": 72.667,
+        "max": 238.0
+      }
+    },
+    "fev1": {
+      "file": "fev1.csv",
+      "app_dataset_id": "nhanes_fev1",
+      "n_rows": 5820,
+      "n_train": 4656,
+      "n_validation": 1164,
+      "feature_order": [
+        "age",
+        "female",
+        "bmi",
+        "income_poverty_ratio"
+      ],
+      "target": "fev1",
+      "target_summary": {
+        "mean": 2879.137,
+        "sd": 966.094,
+        "min": 409.0,
+        "max": 6923.0
+      }
+    }
+  }
+}

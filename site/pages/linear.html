@@ -1,0 +1,78 @@
+<!--meta {"title":"Push & Pull: linear regression","description":"Competition brief: explain how a linear regression model combines features into a prediction.","scripts":["demos.js"]} -->
+<p class="eyebrow">Competition · Linear regression {{help linear-regression}}</p>
+<h1>Push &amp; Pull</h1>
+<p class="core-question">Which features push a prediction up or down, and by how much?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive visualization that helps someone with no machine-learning background see how a linear regression model combines features {{help feature}} into a prediction {{help prediction}}.</dd>
+  <dt>Learning objective</dt><dd>Rebuild a prediction from a starting point and one signed push per feature, and tell a coefficient apart from one person's push.</dd>
+  <dt>Viewer takeaway</dt><dd>The model starts from an average prediction and adds one push per feature.</dd>
+</dl>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="linear-required"></p>
+<ul class="checklist" data-store="linear-required">
+  <li><input type="checkbox" id="lin-r1"><div class="item-body"><label for="lin-r1">The viewer can switch between all three datasets and pick one of the supplied people (Person 1–5).</label></div></li>
+  <li><input type="checkbox" id="lin-r2"><div class="item-body"><label for="lin-r2">Where your tool allows it, the viewer can edit a person's values and watch the prediction update.</label></div></li>
+  <li><input type="checkbox" id="lin-r3"><div class="item-body"><label for="lin-r3">Shows the starting point and each feature's push, up or down, in the target's units.</label> {{help baseline}} {{help contribution}}</div></li>
+  <li><input type="checkbox" id="lin-r4"><div class="item-body"><label for="lin-r4">The pushes visibly add up: starting point + all pushes = prediction.</label></div></li>
+  <li><input type="checkbox" id="lin-r5"><div class="item-body"><label for="lin-r5">One short explanation of what a coefficient means, with its units.</label> {{help coefficient}}</div></li>
+  <li><input type="checkbox" id="lin-r6"><div class="item-body"><label for="lin-r6">Makes clear that one person's pushes are not the same as "the most important feature overall".</label> {{help importance}}</div></li>
+  <li><input type="checkbox" id="lin-r7"><div class="item-body"><label for="lin-r7">Sex and ethnicity are menus (one push each), not separate on/off switches, and the reference group is named.</label> {{help reference-group}}</div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="linear-done"></p>
+<ul class="checklist" data-store="linear-done">
+  <li><input type="checkbox" id="lin-d1"><div class="item-body"><label for="lin-d1">Person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="lin-d2"><div class="item-body"><label for="lin-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="lin-d3"><div class="item-body"><label for="lin-d3">Every number has units, and the wording describes associations, not causes.</label> {{help association}}</div></li>
+  <li><input type="checkbox" id="lin-d4"><div class="item-body"><label for="lin-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+{{check linear}}
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Blood pressure → Person 2</strong>. Which feature pushes the prediction up the most, and how does the app show it?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Compare features "in general" with the typical effect (coefficient × standard deviation), never with raw coefficients. {{help typical-effect}}</li>
+      <li>Show where a straight line struggles: try <strong>Lung function → Person 1</strong>, a 9-year-old.</li>
+      <li>Let the viewer build a custom person from scratch.</li>
+    </ul>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A receipt with line items, a tug-of-war, a mixing board, a waterfall, a balance scale… Pick a picture your viewer already understands.</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: how a coefficient and a value make a push</summary>
+  <div class="details-body"><div id="demo-linear"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>linear</code> {{help model-outputs}}:</p>
+<ul>
+  <li><code>baseline</code>: the starting point.</li>
+  <li><code>people.&lt;id&gt;.grouped_pushes</code> and <code>prediction</code>: each person's pushes, with sex and ethnicity combined into one push each.</li>
+  <li><code>coefficients</code>, <code>reference</code> (training averages) and <code>typical_effect_per_sd</code>.</li>
+</ul>
+<p>For edited values, call <code>m10.linearExplain(bundle, values)</code> in the browser or <code>m10.linear_explain(bundle, values)</code> in Python. See <a href="data.html#outputs">using the model outputs</a>.</p>
+<p class="small muted">Example first prompt for your agent:</p>
+<blockquote><p>Read <code>AGENT_BRIEF.md</code> and <code>outputs/SCHEMA.md</code> first. Then help me redesign the Push &amp; Pull section as a receipt: each feature is a line item that adds to or subtracts from the starting point.</p></blockquote>
+
+<h2>Common questions</h2>
+<details><summary>Why isn't the starting point the intercept?</summary><div class="details-body">
+  <p>The intercept is the prediction for someone whose every feature is 0 (age 0, BMI 0…), who doesn't exist. The starting point is the prediction for the training average, so each push shows how this person differs from average. {{help intercept}}</p></div></details>
+<details><summary>Why does a man, or a Non-Hispanic White person, still get a sex or ethnicity push?</summary><div class="details-body">
+  <p>Pushes are measured from the training <em>average</em>, which mixes men and women and every group. Being male moves you away from that mix. That's correct, so don't "fix" it. The reference group only describes how the 0/1 columns are coded.</p></div></details>
+<details><summary>The lung-function prediction for a child looks far too high. Is that a bug?</summary><div class="details-body">
+  <p>No. Lungs grow through childhood and shrink later in life, and one straight line can't follow both. Showing where the line fails is a strength of an explainer.</p></div></details>
+<details><summary>Can I say a higher BMI <em>causes</em> higher blood pressure?</summary><div class="details-body">
+  <p>No. The model learned patterns in survey data. Say "people with higher BMI tend to get higher predictions". {{help association}}</p></div></details>

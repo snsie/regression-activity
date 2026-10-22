@@ -1,0 +1,78 @@
+<!--meta {"title":"One Correction at a Time: gradient boosting","description":"Competition brief: explain how gradient boosting improves through successive corrections, and when to stop.","scripts":["demos.js"]} -->
+<p class="eyebrow">Competition · Gradient boosting {{help gradient-boosting}}</p>
+<h1>One Correction at a Time</h1>
+<p class="core-question">How does each new tree improve the model, and when should it stop?</p>
+
+<dl class="facts">
+  <dt>Your task</dt><dd>An interactive experience that lets a learner follow successive corrections and choose a stopping round using validation performance.</dd>
+  <dt>Learning objective</dt><dd>Explain how boosting adds one small correction per round, and use validation error to choose when to stop.</dd>
+  <dt>Viewer takeaway</dt><dd>Boosting starts at the average. Each small tree fixes part of the remaining error, until more trees stop helping on new people.</dd>
+</dl>
+
+<h2>What to build <span class="tag required">Required</span></h2>
+<p class="checklist-status" data-for="boosting-required"></p>
+<ul class="checklist" data-store="boosting-required">
+  <li><input type="checkbox" id="bst-r1"><div class="item-body"><label for="bst-r1">The viewer can switch between all three datasets and pick one of the supplied people (Person 1–5).</label></div></li>
+  <li><input type="checkbox" id="bst-r2"><div class="item-body"><label for="bst-r2">Starts at round 0: the training average.</label> {{help round}}</div></li>
+  <li><input type="checkbox" id="bst-r3"><div class="item-body"><label for="bst-r3">The viewer steps through rounds and sees, for each round: the previous prediction → the new correction → the updated prediction.</label> {{help correction}} {{help learning-rate}}</div></li>
+  <li><input type="checkbox" id="bst-r4"><div class="item-body"><label for="bst-r4">Explains that each new tree is fitted to the training residuals (what the earlier rounds got wrong).</label> {{help residual}}</div></li>
+  <li><input type="checkbox" id="bst-r5"><div class="item-body"><label for="bst-r5">Shows training and validation error by round, with labelled axes and units.</label> {{help rmse}} {{help validation-data}}</div></li>
+  <li><input type="checkbox" id="bst-r6"><div class="item-body"><label for="bst-r6">The viewer picks a stopping round and compares it with the round where validation error is lowest. This is called a validation-based choice, not a test result.</label> {{help stopping-round}} {{help test-result}}</div></li>
+</ul>
+
+<h2>Done when</h2>
+<p class="checklist-status" data-for="boosting-done"></p>
+<ul class="checklist" data-store="boosting-done">
+  <li><input type="checkbox" id="bst-d1"><div class="item-body"><label for="bst-d1">Person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="bst-d2"><div class="item-body"><label for="bst-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
+  <li><input type="checkbox" id="bst-d3"><div class="item-body"><label for="bst-d3">The corrections are used as supplied, never multiplied by the learning rate again.</label></div></li>
+  <li><input type="checkbox" id="bst-d4"><div class="item-body"><label for="bst-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
+</ul>
+{{check boosting}}
+
+<div class="callout">
+  <p class="callout-title">Reviewers will try</p>
+  <p>Pick <strong>Glucose</strong> and choose a stopping round. Where would you stop, and why not at the round with the lowest <em>training</em> error?</p>
+</div>
+
+<details class="optional">
+  <summary>Optional extensions <span class="tag optional">Optional</span></summary>
+  <div class="details-body">
+    <ul>
+      <li>Compare learning rate 0.1 with the separately trained 0.02 model (<code>comparison_learning_rate_0_02</code>). Don't rescale the 0.1 numbers.</li>
+      <li>Plot residuals before and after a round, using <code>residual_snapshots</code>.</li>
+      <li>Live predictions for edited values with <code>m10.boostingRounds(key, values)</code>.</li>
+    </ul>
+  </div>
+</details>
+
+<h2>Ideas, not templates</h2>
+<p>A sculptor chipping at a statue, tuning a guitar string, a GPS re-routing, editing an essay draft by draft…</p>
+
+<h2>See the idea in a tiny example</h2>
+<details class="demo">
+  <summary>Try it: successive corrections, and why training and validation error differ</summary>
+  <div class="details-body"><div id="demo-boost"></div></div>
+</details>
+
+<h2>Where your numbers come from</h2>
+<p>Everything is in <code>outputs/&lt;dataset&gt;.json</code> under <code>boosting</code> {{help model-outputs}}:</p>
+<ul>
+  <li><code>init</code>: round 0, the training average.</li>
+  <li><code>people.&lt;id&gt;.staged[m]</code>: the prediction after round <em>m</em> (501 values).</li>
+  <li><code>people.&lt;id&gt;.corrections[m-1]</code>: what tree <em>m</em> added. This already includes the learning rate.</li>
+  <li><code>rmse.train</code>, <code>rmse.validation</code>, <code>best_validation_round</code>: the error curves.</li>
+</ul>
+<p>See <a href="data.html#outputs">using the model outputs</a>.</p>
+
+<h2>Common questions</h2>
+<details><summary>Why start at the average?</summary><div class="details-body">
+  <p>Before any trees, the best single guess for everyone (with squared error) is the average outcome in the training data. Every tree after that corrects it.</p></div></details>
+<details><summary>Why are the corrections so small?</summary><div class="details-body">
+  <p>Only 10% of each tree's suggestion is used (learning rate 0.1). Small, careful steps usually generalize better than big jumps. {{help learning-rate}}</p></div></details>
+<details><summary>Why does training error keep falling when validation error doesn't?</summary><div class="details-body">
+  <p>Later trees start fitting noise: quirks of the training people that new people don't share. That's overfitting. {{help overfitting}}</p></div></details>
+<details><summary>Does every round improve every person?</summary><div class="details-body">
+  <p>No. A correction can move a person's prediction the wrong way, and a round doesn't have to improve validation error. Watch the overall error curves.</p></div></details>
+<details><summary>Why "validation", not "test"?</summary><div class="details-body">
+  <p>We look at the validation error to choose the stopping round, so it was used to make a decision. A true test result needs data that was never used for any choice. {{help test-result}}</p></div></details>
