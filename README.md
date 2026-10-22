@@ -12,8 +12,9 @@ Students build one public app that explains three regression models (linear regr
 | [`starter/`](starter) | **The student starter.** It is also downloadable as a zip from the website. Contents: the three datasets and their dictionary (`data/`), the precomputed model outputs (`outputs/`), plain three-section apps for GitHub Pages (`index.html`, `app.js`, `m10.js`) and Streamlit (`streamlit_app.py`, `m10.py`), plus `AGENT_BRIEF.md`, `SETUP.md` and `check.md`. |
 | [`reproduce/`](reproduce) | Rebuilds `starter/data/` and `starter/outputs/` from the CDC's NHANES files, with pinned versions and fingerprint checks. `python reproduce/reproduce.py --check` confirms the committed files are reproduced. |
 | [`site/`](site) | Website source: page fragments (`pages/`), `layout.html`, the glossary (`terms.json`), and styles and scripts (`assets/`). |
+| [`gallery/`](gallery) | Backend for the **Gallery & votes** page: a Google Apps Script web app on a Google Sheet. Anyone can add app links; votes are anonymous, one per person per app, and never for your own app. [Setup](gallery/README.md). |
 | [`scripts/`](scripts) | `build.mjs` builds the site into `dist/` and zips the starter. `serve.mjs` previews it under the same subpath GitHub Pages uses. |
-| [`tests/`](tests) | `demo-math.test.mjs` checks the illustrative demos against scikit-learn. `e2e.py` checks links, downloads, help buttons, keyboard and touch use, layout and demos in a browser. |
+| [`tests/`](tests) | `demo-math.test.mjs` checks the illustrative demos against scikit-learn. `gallery.test.mjs` checks the gallery's voting rules. `e2e.py` checks links, downloads, help buttons, keyboard and touch use, layout and demos in a browser. |
 
 ## Build and preview
 Requires Node 20 or later; there are no npm dependencies.

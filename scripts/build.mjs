@@ -29,13 +29,20 @@ const NAV = [
   { file: "data", label: "Data & files" },
   { file: "hosting", label: "Publish & back up" },
   { file: "submit", label: "Submit & evaluation" },
+  { file: "gallery", label: "Gallery & votes" },
   { file: "glossary", label: "Glossary" },
 ];
-const PAGES = ["index", "linear", "forest", "boosting", "data", "hosting", "submit", "glossary", "404"];
+const PAGES = ["index", "linear", "forest", "boosting", "data", "hosting", "submit", "gallery", "glossary", "404"];
 
 const terms = JSON.parse(readFileSync(join(SITE, "terms.json"), "utf8"));
 const datasets = JSON.parse(readFileSync(join(STARTER, "data", "datasets.json"), "utf8"));
 const manifest = JSON.parse(readFileSync(join(STARTER, "data", "manifest.json"), "utf8"));
+// The gallery's Apps Script web app (gallery/README.md). GALLERY_ENDPOINT overrides it,
+// e.g. to preview against the local mock: node tests/gallery-mock.mjs
+const GALLERY = process.env.GALLERY_ENDPOINT ?? JSON.parse(readFileSync(join(SITE, "gallery.json"), "utf8")).endpoint;
+if (GALLERY && !process.env.GALLERY_ENDPOINT && !/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(GALLERY)) {
+  throw new Error(`site/gallery.json: endpoint should be an Apps Script web app URL ending in /exec, not ${GALLERY}`);
+}
 const bundles = Object.fromEntries(
   Object.keys(datasets).map((k) => [k, JSON.parse(readFileSync(join(STARTER, "outputs", `${k}.json`), "utf8"))]),
 );
@@ -176,7 +183,8 @@ function expand(html, zipBytes) {
     .replace(/\{\{glossary\}\}/g, () => glossary())
     .replace(/\{\{files\}\}/g, () => fileList())
     .replace(/\{\{zip\}\}/g, () => `<a class="button primary" href="downloads/${ZIP_NAME}" download>Download the starter (.zip, ${size(zipBytes)})</a>`)
-    .replace(/\{\{zipurl\}\}/g, `downloads/${ZIP_NAME}`);
+    .replace(/\{\{zipurl\}\}/g, `downloads/${ZIP_NAME}`)
+    .replace(/\{\{gallery-endpoint\}\}/g, () => esc(GALLERY));
 }
 
 function nav(current) {

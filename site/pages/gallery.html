@@ -1,0 +1,55 @@
+<!--meta {"title":"Gallery & votes","description":"Every app from the class in one list. Add your app's link, try classmates' apps and vote anonymously.","scripts":["gallery.js"]} -->
+<p class="eyebrow">Resources</p>
+<h1>Gallery &amp; votes</h1>
+<p class="lead">Every app from the class in one list. Add your app's public link, try your classmates' apps, and vote for the ones that explain the models best.</p>
+
+<div id="gallery" class="gallery wide" data-endpoint="{{gallery-endpoint}}">
+  <noscript><div class="callout"><p>The gallery needs JavaScript. Turn it on to see the list and vote.</p></div></noscript>
+  <div class="callout gallery-closed" hidden>
+    <p class="callout-title">The gallery isn't open yet</p>
+    <p>It opens in class, when the evaluation starts. Until then, finish your app and <a href="submit.html">submit it on Canvas</a>.</p>
+  </div>
+  <p class="callout gallery-key-note" hidden>This browser isn't saving your voter key, so after a reload you'll count as a new voter and won't see your earlier votes. Please vote from a normal (not private) window.</p>
+
+  <form class="add-form card" id="add-form" hidden novalidate>
+    <h2>Add an app</h2>
+    <div class="add-fields">
+      <label class="field">Public app link
+        <input type="url" name="url" id="add-url" required placeholder="https://username.github.io/explain-the-model/" autocomplete="url" inputmode="url" maxlength="500">
+      </label>
+      <label class="field"><span>Name <span class="muted">(optional)</span></span>
+        <input type="text" name="title" id="add-title" maxlength="80" placeholder="e.g. Glucose, explained">
+      </label>
+    </div>
+    <p><button type="submit" class="button primary">Add to the list</button></p>
+    <p class="form-msg small" id="add-msg" role="status" aria-live="polite"></p>
+    <p class="small muted">Add your own app from the browser you'll vote from, so it's marked as yours.</p>
+  </form>
+
+  <section class="gallery-apps" hidden aria-labelledby="apps-heading">
+    <div class="gallery-head">
+      <h2 id="apps-heading">Apps <span class="gallery-summary muted small"></span></h2>
+      <div class="gallery-tools">
+        <label class="field inline">Sort
+          <select id="gallery-sort">
+            <option value="votes">Most votes</option>
+            <option value="new">Newest first</option>
+            <option value="name">A–Z</option>
+          </select>
+        </label>
+        <button type="button" class="pill-button" id="gallery-refresh">Refresh</button>
+      </div>
+    </div>
+    <p class="gallery-status small muted" role="status" aria-live="polite">Loading the gallery…</p>
+    <ol class="gallery-list" id="gallery-list"></ol>
+  </section>
+</div>
+
+<h2>Voting rules</h2>
+<ul>
+  <li><strong>Anyone can add an app.</strong> Paste its public link above. Each link can be listed only once.</li>
+  <li><strong>One vote per app.</strong> Vote for as many apps as you like, but only once each. A vote can't be taken back.</li>
+  <li><strong>Not your own.</strong> You can't vote for an app you added.</li>
+  <li><strong>Anonymous.</strong> The list shows only totals. No names are stored, and nobody can see who voted for which app.</li>
+  <li><strong>One browser, one voter.</strong> There's no sign-in: your browser keeps a random key that stands for you. Please add and vote from one browser, and don't vote again from another device or a private window.</li>
+</ul>

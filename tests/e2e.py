@@ -7,10 +7,15 @@
 (First time: uv run --with playwright python -m playwright install chromium)
 Checks links and downloads, help buttons (keyboard and touch), the mobile menu,
 demos, saved checklists, page width at several screen sizes, and console errors.
+The gallery is checked against a local mock of its backend (tests/gallery-mock.mjs),
+so no real votes are cast, even when testing the deployed site.
 """
 
 import io
+import re
+import subprocess
 import sys
+import time
 import urllib.request
 import zipfile
 from urllib.parse import urljoin, urlparse
@@ -18,7 +23,7 @@ from urllib.parse import urljoin, urlparse
 from playwright.sync_api import expect, sync_playwright
 
 BASE = sys.argv[1].rstrip("/") + "/"
-PAGES = ["", "linear.html", "forest.html", "boosting.html", "data.html", "hosting.html", "submit.html", "glossary.html"]
+PAGES = ["", "linear.html", "forest.html", "boosting.html", "data.html", "hosting.html", "submit.html", "gallery.html", "glossary.html"]
 failures: list[str] = []
 
 
@@ -174,6 +179,121 @@ with sync_playwright() as p:
     page.reload()
     check(page.locator("#fin-1").is_checked() and page.locator("#fin-3").is_checked(), "ticks survive a reload")
     check("2 of 8 done" in page.locator('.checklist-status[data-for="final"]').inner_text(), "progress count shown")
+
+    # ---- gallery & votes, against the local mock backend
+    print("Gallery & votes")
+    page.goto(BASE + "gallery.html")
+    configured = page.locator("#gallery").get_attribute("data-endpoint")
+    if not configured:
+        check(page.locator(".gallery-closed").is_visible() and page.locator("#add-form").is_hidden(),
+              "with no backend configured, the page says the gallery isn't open yet")
+    # The page calls a stand-in Apps Script URL, which Playwright forwards to the mock
+    # (Chromium won't let a page call a different localhost port directly).
+    mock_port = 4175
+    mock_url = "https://script.google.com/macros/s/e2e-mock/exec"
+    mock = subprocess.Popen(["node", "tests/gallery-mock.mjs", str(mock_port)], stdout=subprocess.PIPE)
+    mock.stdout.readline()  # waits until it's listening
+    try:
+        def point_at_mock(route):
+            html = route.fetch().text()
+            route.fulfill(body=re.sub(r'data-endpoint="[^"]*"', f'data-endpoint="{mock_url}"', html),
+                          headers={"content-type": "text/html; charset=utf-8"})
+
+        def to_mock(route):
+            route.fulfill(response=route.fetch(url=f"http://localhost:{mock_port}/exec"))
+
+        def person(c=None):
+            c = c or browser.new_context()
+            c.route(BASE + "gallery.html", point_at_mock)
+            c.route(mock_url, to_mock)
+            pg = c.new_page()
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(BASE + "gallery.html")
+            return pg
+
+        def row(pg, name):
+            return pg.locator(".gallery-item", has_text=name)
+
+        errors.clear()
+        alice = person()
+        expect(alice.locator(".gallery-status")).to_have_text("No apps yet. Add the first one above.")
+        alice.locator("#add-url").fill("alice.github.io")
+        alice.get_by_role("button", name="Add to the list").click()
+        check("starting with https://" in alice.locator("#add-msg").inner_text() and
+              alice.locator("#add-url").get_attribute("aria-invalid") == "true", "a link without https:// is refused")
+        alice.locator("#add-url").fill("https://alice.github.io/explain-the-model/")
+        alice.locator("#add-title").fill("Alice's app")
+        alice.get_by_role("button", name="Add to the list").click()
+        expect(row(alice, "Alice's app")).to_be_visible()
+        check("Added by you" in row(alice, "Alice's app").text_content() and
+              row(alice, "Alice's app").locator(".vote-button").count() == 0, "your own app is marked, with no Vote button")
+        check(alice.locator("#add-url").input_value() == "", "the form clears after adding")
+        alice.locator("#add-url").fill("http://alice.github.io/explain-the-model/index.html")
+        alice.get_by_role("button", name="Add to the list").click()
+        expect(alice.locator("#add-msg")).to_have_text("That app is already in the list.")
+
+        bob = person()
+        a_row = row(bob, "Alice's app")
+        expect(a_row).to_be_visible()
+        check("Added by you" not in a_row.text_content(), "another person doesn't see it as theirs")
+        check(a_row.locator("a").get_attribute("target") == "_blank" and
+              "noopener" in a_row.locator("a").get_attribute("rel"), "app links open safely in a new tab")
+        a_row.get_by_role("button", name="Vote for Alice's app").click()
+        expect(a_row.locator(".vote-done")).to_have_text("✓ You voted")
+        check(a_row.locator(".vote-count").inner_text() == "1 vote", "the vote is counted")
+        check(bob.evaluate("document.activeElement.classList.contains('vote-done')"), "focus stays on the app after voting")
+        bob.reload()
+        expect(row(bob, "Alice's app").locator(".vote-done")).to_have_text("✓ You voted")
+        check(row(bob, "Alice's app").locator(".vote-button").count() == 0, "after a reload, you still can't vote again")
+        bob.locator("#add-url").fill("https://bob.streamlit.app")
+        bob.get_by_role("button", name="Add to the list").click()
+        expect(row(bob, "bob.streamlit.app")).to_be_visible()
+        check(row(bob, "bob.streamlit.app").locator(".gallery-title").inner_text() == "bob.streamlit.app",
+              "an app without a name is listed by its address")
+
+        api = "(a) => fetch(a.url, {method: 'POST', body: JSON.stringify({action: 'vote', id: a.id, key: localStorage.getItem('explain-the-model:gallery-key')})}).then(r => r.json())"
+        a_id = row(bob, "Alice's app").get_attribute("data-id")
+        b_id = row(bob, "bob.streamlit.app").get_attribute("data-id")
+        r = bob.evaluate(api, {"url": mock_url, "id": a_id})
+        check(not r["ok"] and "already voted" in r["error"], "the server refuses a second vote from the same person")
+        r = alice.evaluate(api, {"url": mock_url, "id": a_id})
+        check(not r["ok"] and "you added" in r["error"], "the server refuses a vote for your own app")
+
+        carol = person()
+        btn = row(carol, "bob.streamlit.app").get_by_role("button", name="Vote for bob.streamlit.app")
+        btn.focus()
+        carol.keyboard.press("Enter")
+        expect(row(carol, "bob.streamlit.app").locator(".vote-done")).to_be_visible()
+        row(carol, "Alice's app").get_by_role("button").click()
+        expect(row(carol, "Alice's app").locator(".vote-count")).to_have_text("2 votes")
+        carol.locator("#gallery-sort").select_option("votes")
+        check(carol.locator(".gallery-item").first.inner_text().startswith("Alice's app"), "sorting by votes puts the most-voted app first")
+        carol.locator("#gallery-sort").select_option("name")
+        check(carol.locator(".gallery-item").first.inner_text().startswith("Alice's app"), "A–Z sorting")
+        carol.locator("#gallery-sort").select_option("new")
+        check(carol.locator(".gallery-item").first.inner_text().startswith("bob.streamlit.app"), "newest-first sorting")
+        check("2 apps, 3 votes" in carol.locator(".gallery-summary").inner_text(), "summary shows apps and total votes")
+
+        alice.get_by_role("button", name="Refresh").click()
+        expect(row(alice, "Alice's app").locator(".vote-count")).to_have_text("2 votes")
+        check(row(alice, "Alice's app").locator(".vote-done").inner_text() == "Your app", "still no vote button on your own app")
+        check(not errors, f"no script errors in the gallery {errors[:3]}")
+
+        nostore = browser.new_context()
+        nostore.add_init_script("Storage.prototype.setItem = () => { throw new Error('blocked'); }")
+        ns = person(nostore)
+        expect(ns.locator(".gallery-item")).to_have_count(2)
+        check(ns.locator(".gallery-key-note").is_visible(), "a browser that can't save the key is warned")
+
+        for w in [320, 390]:
+            c = browser.new_context(viewport={"width": w, "height": 900})
+            v = person(c)
+            expect(v.locator(".gallery-item")).to_have_count(2)
+            sw = v.evaluate("document.documentElement.scrollWidth")
+            check(sw <= w, f"gallery with apps has no sideways scrolling at {w}px ({sw})")
+            c.close()
+    finally:
+        mock.terminate()
 
     browser.close()
 
