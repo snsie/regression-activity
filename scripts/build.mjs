@@ -5,6 +5,7 @@
 // on any unknown glossary term or missing download, so broken links can't ship.
 // All links are relative, so the site works under the GitHub Pages project subpath.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { join, relative } from "node:path";
 import { makeZip } from "./zip.mjs";
 
@@ -14,6 +15,9 @@ const STARTER = join(ROOT, "starter");
 const OUT = join(ROOT, "dist");
 const REPO = "https://github.com/snsie/regression-activity";
 const ZIP_NAME = "explain-the-model-starter.zip";
+const VERSION = (process.env.GITHUB_SHA || (() => {
+  try { return execSync("git rev-parse HEAD", { cwd: ROOT }).toString().trim(); } catch { return "local"; }
+})()).slice(0, 7);
 
 const NAV = [
   { file: "index", label: "Overview" },
@@ -205,6 +209,7 @@ for (const page of PAGES) {
     .replaceAll("{{page}}", page)
     .replace("{{base}}", meta.base ? `<base href="${meta.base}">` : "")
     .replace("{{nav}}", nav(page))
+    .replace("{{version}}", VERSION === "local" ? "local build" : `<a href="${REPO}/commit/${VERSION}">version ${VERSION}</a>`)
     .replace("{{content}}", body)
     .replace("{{scripts}}", (meta.scripts || []).map((s) => `<script type="module" src="assets/${s}"></script>`).join(""));
   if (/\{\{[a-z]/.test(html)) throw new Error(`unexpanded token in ${page}: ${html.match(/\{\{[^}]*\}\}/)[0]}`);
