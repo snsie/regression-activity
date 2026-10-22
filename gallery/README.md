@@ -11,7 +11,7 @@ The website's [Gallery & votes](https://snsie.github.io/regression-activity/gall
 ## Setup (about 10 minutes, once)
 1. Create a new Google Sheet, e.g. "Explain the Model gallery".
 2. In the Sheet, choose **Extensions → Apps Script**. Replace the editor's contents with [`Code.gs`](Code.gs) and save.
-3. In the function menu, choose `setup` and click **Run**. Approve the permissions; the script only uses this Sheet. This creates the **Sites** and **Votes** tabs.
+3. Save the script. The menu next to **Run** and **Debug** in the toolbar picks the function that **Run** runs, and it starts on `doGet`, which changes nothing. Choose `setup` there, then click **Run**. Approve the permissions; the script only uses this Sheet. This creates the **Sites** and **Votes** tabs.
 4. Choose **Deploy → New deployment → Web app**, with:
    - **Execute as:** Me
    - **Who has access:** Anyone
