@@ -118,7 +118,7 @@ main > .wide, main > .table-wrap, main > .card-grid { max-width: 60rem; }
 .facts dd { margin: 0; }
 @media (max-width: 520px) { .facts { grid-template-columns: 1fr; gap: 0.1rem; } .facts dd { margin-bottom: 0.6rem; } }
 
-.timeline { display: grid; grid-template-columns: 1.6fr 5fr 1.6fr; gap: 4px; margin: 1rem 0 0.25rem; }
+.timeline { display: grid; grid-template-columns: 5fr 1.6fr; gap: 4px; margin: 1rem 0 0.25rem; }
 .timeline div { padding: 0.6rem 0.75rem; border-radius: 8px; font-size: 0.9rem; background: var(--surface-soft); }
 .timeline .build { background: var(--accent-soft); }
 .timeline strong { display: block; }
