@@ -10,6 +10,7 @@ Students build one public app that explains three regression models (linear regr
 | Folder | What it is |
 |---|---|
 | [`starter/`](starter) | **The student starter.** It is also downloadable as a zip from the website. Contents: the three datasets and their dictionary (`data/`), the precomputed model outputs (`outputs/`), plain three-section apps for GitHub Pages (`index.html`, `app.js`, `m10.js`) and Streamlit (`streamlit_app.py`, `m10.py`), plus `AGENT_BRIEF.md`, `SETUP.md` and `check.md`. |
+| [`reproduce/`](reproduce) | Rebuilds `starter/data/` and `starter/outputs/` from the CDC's NHANES files, with pinned versions and fingerprint checks. `python reproduce/reproduce.py --check` confirms the committed files are reproduced. |
 | [`site/`](site) | Website source: page fragments (`pages/`), `layout.html`, the glossary (`terms.json`), and styles and scripts (`assets/`). |
 | [`scripts/`](scripts) | `build.mjs` builds the site into `dist/` and zips the starter. `serve.mjs` previews it under the same subpath GitHub Pages uses. |
 | [`tests/`](tests) | `demo-math.test.mjs` checks the illustrative demos against scikit-learn. `e2e.py` checks links, downloads, help buttons, keyboard and touch use, layout and demos in a browser. |
@@ -27,5 +28,8 @@ Pushing to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy
 
 ## Data
 - **Source:** CDC/NCHS National Health and Nutrition Examination Survey (NHANES) 2017–2018 and 2011–2012 public-use files.
-- **Preparation:** with the [regression-app](https://github.com/snsie/regression-app) pipeline. `starter/data/manifest.json` records the source commit, package versions and row counts.
-- **Models:** fitted with scikit-learn on a fixed 80/20 split (seed 0). The settings are listed on the website's Data & files page.
+- **Reproducible:** [`reproduce/`](reproduce) downloads the eight raw files (checked by SHA-256), rebuilds the datasets and refits the models with pinned versions. The [Reproduce data](.github/workflows/reproduce.yml) workflow runs this check on GitHub.
+- **Provenance:** `starter/data/manifest.json` records the raw files, package versions and row counts. The dataset definitions come from the [regression-app](https://github.com/snsie/regression-app) pipeline.
+
+## Submission
+Students submit their **GitHub repository link on Canvas**. Their public app link goes at the top of the repository's `README.md`; the starter README has a place for it, for each section's link and for each takeaway sentence.

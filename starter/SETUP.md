@@ -34,7 +34,7 @@ The activity website has the same steps with pictures and troubleshooting: <http
 - **Route B:** at [share.streamlit.io](https://share.streamlit.io), click **Create app**, pick your repository, branch `main` and file `streamlit_app.py`, then click **Deploy**.
 
 ## 4. Check it like a reviewer
-Open your link in a **private/incognito window**. It must load without signing in. Put the link at the top of `README.md`, then commit and push.
+Open your link in a **private/incognito window**. It must load without signing in. Put the link at the top of `README.md` (the starter has a place for it), then commit and push. You'll submit this repository's link on Canvas.
 
 ## Something broke?
 - **The Pages link shows a 404:** wait 2 minutes, and check that Pages is set to `main` and `/ (root)`.

@@ -22,12 +22,12 @@
 <p>5,820 people aged 6–79 from NHANES 2011–2012, the most recent survey with lung tests. Height is left out on purpose, so the models have to learn how lung size changes with age. {{dl data/fev1.csv}}</p>
 {{dataset fev1}}
 
-<h3 id="people">The five people</h3>
-<p>Every app uses the same five validation people per dataset, so reviewers can compare apps. They were picked to be interesting:</p>
+<h3 id="people">The five example people</h3>
+<p>Each dataset comes with five <strong>example people</strong> {{help example-person}}: real survey participants from the validation data, not students and not made up. Every app offers the same five, so reviewers can find the same example person in any app. They were picked to be interesting:</p>
 <ul>
-  <li><strong>Persons 1–3:</strong> a low, a typical and a high outcome.</li>
-  <li><strong>Person 4:</strong> the one the forest's trees disagree on most.</li>
-  <li><strong>Person 5:</strong> the one the trees agree on most.</li>
+  <li><strong>Example people 1–3:</strong> a low, a typical and a high outcome.</li>
+  <li><strong>Example person 4:</strong> the one the forest's trees disagree on most.</li>
+  <li><strong>Example person 5:</strong> the one the trees agree on most.</li>
 </ul>
 <p>Their details are in <code>people</code> in each output file.</p>
 
@@ -56,7 +56,7 @@
 <pre><code>import * as m10 from "./m10.js";
 
 const bundle = await m10.loadBundle("sbp");      // "glucose", "sbp" or "fev1"
-const person = bundle.people[0];                 // Person 1
+const person = bundle.people[0];                 // Example person 1
 const ex = m10.linearExplain(bundle, person.values);
 console.log(ex.baseline, ex.groupedPushes, ex.prediction);
 console.log(bundle.forest.people[person.id].prediction);</code></pre>
@@ -68,7 +68,7 @@ console.log(bundle.forest.people[person.id].prediction);</code></pre>
 <pre><code>import m10
 
 bundle = m10.load_bundle("sbp")                  # "glucose", "sbp" or "fev1"
-person = bundle["people"][0]                     # Person 1
+person = bundle["people"][0]                     # Example person 1
 ex = m10.linear_explain(bundle, person["values"])
 print(ex["baseline"], ex["grouped_pushes"], ex["prediction"])
 print(bundle["boosting"]["best_validation_round"])</code></pre>
@@ -89,8 +89,14 @@ print(bundle["boosting"]["best_validation_round"])</code></pre>
 <h2 id="files">All files</h2>
 {{files}}
 
+<h2 id="reproduce">Rebuild the data yourself</h2>
+<p>Everything in the starter's <code>data/</code> and <code>outputs/</code> folders can be rebuilt from the original NHANES files with one command. See the {{repo reproduce|reproduce folder}} on GitHub:</p>
+<pre><code>pip install -r reproduce/requirements.txt
+python reproduce/reproduce.py --check</code></pre>
+<p class="small">The script downloads the eight NHANES files from the CDC and checks each against a recorded SHA-256 fingerprint. It then rebuilds the three CSVs and refits the three models with pinned package versions. With <code>--check</code>, it confirms the rebuilt files match the ones you downloaded.</p>
+
 <h2 id="sources">Sources and attribution</h2>
 <ul class="small">
   <li>Centers for Disease Control and Prevention, National Center for Health Statistics. National Health and Nutrition Examination Survey 2017–2018 and 2011–2012, public-use data files. <a href="https://wwwn.cdc.gov/nchs/nhanes/">wwwn.cdc.gov/nchs/nhanes</a></li>
-  <li>Datasets prepared with the <a href="https://github.com/snsie/regression-app">regression-app</a> pipeline (<code>pipeline/datasets.py</code>); the source commit is recorded in <code>data/manifest.json</code>.</li>
+  <li>Dataset definitions come from the <a href="https://github.com/snsie/regression-app">regression-app</a> pipeline (<code>pipeline/datasets.py</code>), copied into <code>reproduce/nhanes.py</code>. <code>data/manifest.json</code> records the raw files, their fingerprints and the package versions.</li>
 </ul>

@@ -1,8 +1,16 @@
 # Explain the Model
 
-**App:** _paste your public link here_
+**App:** _paste your public app link here_
 
-An app that explains three regression models to someone with no machine-learning background: how a straight-line model adds up feature pushes, how a forest of trees averages its guesses, and how boosting improves one correction at a time. Datasets: NHANES fasting glucose, blood pressure and lung function.
+| Section | Direct link | My viewer should walk away knowing… |
+|---|---|---|
+| Push & Pull (linear regression) | _link_ | _one sentence_ |
+| Wisdom of the Forest (random forest) | _link_ | _one sentence_ |
+| One Correction at a Time (gradient boosting) | _link_ | _one sentence_ |
+
+An app that explains three regression models to someone with no machine-learning background. Datasets: NHANES fasting glucose, blood pressure and lung function.
+
+Submit the link to **this repository** on Canvas. Reviewers open the app link above.
 
 ## What's here
 | File | What it is |

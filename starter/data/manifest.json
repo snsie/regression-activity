@@ -1,8 +1,42 @@
 {
-  "source_repo": "regression-app (pipeline/datasets.py)",
-  "source_commit": "54bce02f8a93cf9839251894a4fff664dab97eef",
+  "built_by": "reproduce/reproduce.py in https://github.com/snsie/regression-activity",
+  "dataset_definitions": "regression-app pipeline/datasets.py at commit 54bce02f8a93cf9839251894a4fff664dab97eef (copied into reproduce/nhanes.py)",
+  "raw_files": {
+    "DEMO_J": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/DEMO_J.xpt",
+      "sha256": "c0b46e0345ea19404928656277c8b0d10b0cca348a9b2fe4fc3c67e8b7ee73ec"
+    },
+    "BMX_J": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/BMX_J.xpt",
+      "sha256": "8d675e42d8826ac98714b2c3dd4c5138a5e353fb4424f7eff5e6db4a01ce838a"
+    },
+    "BPX_J": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/BPX_J.xpt",
+      "sha256": "f98f1d9a4c18173e715c749b4294f6f1525140d5ad5751316bb17cc038fb3423"
+    },
+    "GHB_J": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/GHB_J.xpt",
+      "sha256": "35f07094573a0061a03ed609a5a363b34eb1b1c7065d1623b43d72e132a8a654"
+    },
+    "GLU_J": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/GLU_J.xpt",
+      "sha256": "5b38897d0d7bfbc69dd9ca74ffdaf2f6a9bed5a91d4a7bf46e07f1332cc3379e"
+    },
+    "DEMO_G": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/DEMO_G.xpt",
+      "sha256": "eaf0525d1952626885af3e935415a1f66ad62c18698080e7354789c125af252d"
+    },
+    "BMX_G": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/BMX_G.xpt",
+      "sha256": "4814bfc3047ed400b9d43d285f8c3ea7c940ac6489404a9b699579715d158ec3"
+    },
+    "SPX_G": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/SPX_G.xpt",
+      "sha256": "58177b07ad94a2c005b0c9494cddb82fc94ec8f5c6c13a91b83da035f20770d9"
+    }
+  },
   "versions": {
-    "python": "3.11.14",
+    "python": "3.11",
     "pandas": "3.0.6",
     "numpy": "2.4.6",
     "scikit-learn": "1.9.1"
@@ -15,7 +49,6 @@
   "datasets": {
     "glucose": {
       "file": "glucose.csv",
-      "app_dataset_id": "nhanes_glucose",
       "n_rows": 2397,
       "n_train": 1917,
       "n_validation": 480,
@@ -36,7 +69,6 @@
     },
     "sbp": {
       "file": "sbp.csv",
-      "app_dataset_id": "nhanes_sbp",
       "n_rows": 4370,
       "n_train": 3496,
       "n_validation": 874,
@@ -62,7 +94,6 @@
     },
     "fev1": {
       "file": "fev1.csv",
-      "app_dataset_id": "nhanes_fev1",
       "n_rows": 5820,
       "n_train": 4656,
       "n_validation": 1164,

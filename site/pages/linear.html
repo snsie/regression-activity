@@ -12,7 +12,7 @@
 <h2>What to build <span class="tag required">Required</span></h2>
 <p class="checklist-status" data-for="linear-required"></p>
 <ul class="checklist" data-store="linear-required">
-  <li><input type="checkbox" id="lin-r1"><div class="item-body"><label for="lin-r1">The viewer can switch between all three datasets and pick one of the supplied people (Person 1–5).</label></div></li>
+  <li><input type="checkbox" id="lin-r1"><div class="item-body"><label for="lin-r1">The viewer can switch between all three datasets and pick one of the supplied example people (Example person 1–5).</label> {{help example-person}}</div></li>
   <li><input type="checkbox" id="lin-r2"><div class="item-body"><label for="lin-r2">Where your tool allows it, the viewer can edit a person's values and watch the prediction update.</label></div></li>
   <li><input type="checkbox" id="lin-r3"><div class="item-body"><label for="lin-r3">Shows the starting point and each feature's push, up or down, in the target's units.</label> {{help baseline}} {{help contribution}}</div></li>
   <li><input type="checkbox" id="lin-r4"><div class="item-body"><label for="lin-r4">The pushes visibly add up: starting point + all pushes = prediction.</label></div></li>
@@ -24,7 +24,7 @@
 <h2>Done when</h2>
 <p class="checklist-status" data-for="linear-done"></p>
 <ul class="checklist" data-store="linear-done">
-  <li><input type="checkbox" id="lin-d1"><div class="item-body"><label for="lin-d1">Person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="lin-d1"><div class="item-body"><label for="lin-d1">Example person 1 shows the numbers below on all three datasets.</label></div></li>
   <li><input type="checkbox" id="lin-d2"><div class="item-body"><label for="lin-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
   <li><input type="checkbox" id="lin-d3"><div class="item-body"><label for="lin-d3">Every number has units, and the wording describes associations, not causes.</label> {{help association}}</div></li>
   <li><input type="checkbox" id="lin-d4"><div class="item-body"><label for="lin-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>
@@ -33,7 +33,7 @@
 
 <div class="callout">
   <p class="callout-title">Reviewers will try</p>
-  <p>Pick <strong>Blood pressure → Person 2</strong>. Which feature pushes the prediction up the most, and how does the app show it?</p>
+  <p>Pick <strong>Blood pressure → Example person 2</strong>. Which feature pushes the prediction up the most, and how does the app show it?</p>
 </div>
 
 <details class="optional">
@@ -41,7 +41,7 @@
   <div class="details-body">
     <ul>
       <li>Compare features "in general" with the typical effect (coefficient × standard deviation), never with raw coefficients. {{help typical-effect}}</li>
-      <li>Show where a straight line struggles: try <strong>Lung function → Person 1</strong>, a 9-year-old.</li>
+      <li>Show where a straight line struggles: try <strong>Lung function → Example person 1</strong>, a 9-year-old.</li>
       <li>Let the viewer build a custom person from scratch.</li>
     </ul>
   </div>

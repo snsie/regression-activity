@@ -29,6 +29,12 @@
     "short": "Predicting a number (like blood pressure), rather than a category (like yes/no).",
     "more": "All three models here are regression models: each predicts a number in the target's units."
   },
+  "example-person": {
+    "term": "Example person",
+    "group": "Basics",
+    "short": "One of five real survey participants per dataset, chosen in advance so every student's app offers the same people. Not a student, and not made up.",
+    "more": "Example people 1–3 have a low, a typical and a high outcome; 4 is the one the forest's trees disagree on most; 5 is the one they agree on most. Because every app has the same five, a reviewer can ask for \"Blood pressure → Example person 2\" in anyone's app."
+  },
   "training-data": {
     "term": "Training data",
     "group": "Checking a model",

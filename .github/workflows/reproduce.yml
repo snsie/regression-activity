@@ -1,0 +1,26 @@
+# Rebuilds the starter data and model outputs from the CDC's NHANES files and checks
+# they match the committed versions. Run from the Actions tab, or on pipeline changes.
+name: Reproduce data
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "reproduce/**"
+      - "starter/m10.py"
+      - ".github/workflows/reproduce.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r reproduce/requirements.txt
+      - run: python reproduce/reproduce.py --check

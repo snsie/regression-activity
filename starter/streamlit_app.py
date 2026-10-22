@@ -20,7 +20,7 @@ def pick_person() -> tuple[dict, dict]:
     key = st.sidebar.selectbox("Dataset", m10.DATASETS, format_func=LABELS.get, key="dataset")
     b = m10.load_bundle(key)
     labels = {p["id"]: f"{p['label']}: {p['description']}" for p in b["people"]}
-    pid = st.sidebar.selectbox("Person", list(labels), format_func=labels.get, key=f"person_{key}")
+    pid = st.sidebar.selectbox("Example person", list(labels), format_func=labels.get, key=f"person_{key}")
     return b, next(p for p in b["people"] if p["id"] == pid)
 
 

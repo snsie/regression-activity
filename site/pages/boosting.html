@@ -12,7 +12,7 @@
 <h2>What to build <span class="tag required">Required</span></h2>
 <p class="checklist-status" data-for="boosting-required"></p>
 <ul class="checklist" data-store="boosting-required">
-  <li><input type="checkbox" id="bst-r1"><div class="item-body"><label for="bst-r1">The viewer can switch between all three datasets and pick one of the supplied people (Person 1–5).</label></div></li>
+  <li><input type="checkbox" id="bst-r1"><div class="item-body"><label for="bst-r1">The viewer can switch between all three datasets and pick one of the supplied example people (Example person 1–5).</label> {{help example-person}}</div></li>
   <li><input type="checkbox" id="bst-r2"><div class="item-body"><label for="bst-r2">Starts at round 0: the training average.</label> {{help round}}</div></li>
   <li><input type="checkbox" id="bst-r3"><div class="item-body"><label for="bst-r3">The viewer steps through rounds and sees, for each round: the previous prediction → the new correction → the updated prediction.</label> {{help correction}} {{help learning-rate}}</div></li>
   <li><input type="checkbox" id="bst-r4"><div class="item-body"><label for="bst-r4">Explains that each new tree is fitted to the training residuals (what the earlier rounds got wrong).</label> {{help residual}}</div></li>
@@ -23,7 +23,7 @@
 <h2>Done when</h2>
 <p class="checklist-status" data-for="boosting-done"></p>
 <ul class="checklist" data-store="boosting-done">
-  <li><input type="checkbox" id="bst-d1"><div class="item-body"><label for="bst-d1">Person 1 shows the numbers below on all three datasets.</label></div></li>
+  <li><input type="checkbox" id="bst-d1"><div class="item-body"><label for="bst-d1">Example person 1 shows the numbers below on all three datasets.</label></div></li>
   <li><input type="checkbox" id="bst-d2"><div class="item-body"><label for="bst-d2">A classmate can do the reviewer task below in under a minute.</label></div></li>
   <li><input type="checkbox" id="bst-d3"><div class="item-body"><label for="bst-d3">The corrections are used as supplied, never multiplied by the learning rate again.</label></div></li>
   <li><input type="checkbox" id="bst-d4"><div class="item-body"><label for="bst-d4">The section works on your public link, and the code is pushed to GitHub.</label></div></li>

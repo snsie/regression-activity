@@ -164,7 +164,7 @@ with sync_playwright() as p:
                            ("boosting.html", b["boosting"]["people"][pid]["staged"][-1])]:
             page.goto(BASE + sec)
             row = page.locator("table.check tr", has_text=name).inner_text()
-            check(f"{value:,.1f}" in row, f"{sec} {key}: Person 1 shows {value:,.1f}")
+            check(f"{value:,.1f}" in row, f"{sec} {key}: Example person 1 shows {value:,.1f}")
 
     # ---- checklists persist in this browser
     print("Checklists")
